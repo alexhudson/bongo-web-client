@@ -2,8 +2,15 @@
 
 class DataModule {
 	private $store;
+	private $cookie;
+	private $authed;
 	
-	function getStoreHandle() {
+	function __construct($cookie) {
+		$this->cookie = $cookie;
+		$this->authed = false;
+	}
+	
+	function getStoreHandle($user, $password) {
 		if (isset($this->store)) return $this->store;
 		
 		try {
@@ -11,7 +18,29 @@ class DataModule {
 		} catch (Exception $e) {
 			return null;
 		}
+		
+		if (isset($this->cookie)) {
+			$res = $this->store->AuthCookie('admin', $this->cookie);
+			if ($res->response_code == 1000) {
+				$this->authed = true;
+			}
+		} elseif (isset($password)) {
+			$res = $this->store->AuthUser($user, $password);
+			if ($res->response_code == 1000) {
+				$this->authed = true;
+				$this->cookie = $this->store->CookieBake(60*60*24);
+			}
+		}
+		
 		return $this->store;
+	}
+
+	function isAuthed() {
+		return $this->authed;
+	}
+
+	function getCookie() {
+		return $this->cookie;
 	}
 
 	function collectDocumentsFromList($response, &$callback) {

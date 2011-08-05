@@ -10,11 +10,7 @@ Bongo.AdminTool = function(backend) {
 				$.post($this.backend, data, function (d, t, response) {
 					var result = $.parseJSON(response.responseText);
 					if (result['status'] ==  'ok') {
-						// load the data package from Bongo
-						$this.model = ko.mapping.fromJS(result['data']);
-						ko.applyBindings($this.model);
-						$('#login-form').hide();
-						$('#admin-tool').show();
+						$this.loadData(result);
 					} else {
 						$('#login-form-message').text(result['message']);
 					}
@@ -25,6 +21,32 @@ Bongo.AdminTool = function(backend) {
 				return false;
 			});
 			$('#admin-tabs').tabs();
+			
+			var existing_cookie = $.cookie('bongo_admin_cookie');
+			if (existing_cookie) {
+				$('#login-form').hide();
+				// TODO: show some kind of holding thing?
+				$.post($this.backend, { command: 'login', cookie: existing_cookie }, function (d, t, response) {
+					var result = $.parseJSON(response.responseText);
+					if (result['status'] ==  'ok') {
+						$this.loadData(result);
+					} else {
+						$('#login-form').show();
+					}
+				}, 'json').error(function() {
+					$('#login-form').show();
+				});
+			}
+		},
+		
+		loadData: function (result) {
+			// load the data package from Bongo
+			if (result['cookie'])
+				$.cookie('bongo_admin_cookie', result['cookie'], { expires: 1, path: '/' });
+			$this.model = ko.mapping.fromJS(result['data']);
+			ko.applyBindings($this.model);
+			$('#login-form').hide();
+			$('#admin-tool').show();
 		}
 	};
 	$this.backend = backend;
