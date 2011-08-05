@@ -37,9 +37,11 @@
 
 	<div id="admin-tabs">
 		<ul>
-			<li><a href="#tabs-agents">Agents Enabled</a></li>
-			<li><a href="#tabs-antispam">Antispam</a></li>
-			<li><a href="#tabs-antivirus">Antivirus</a></li>
+			<li><a href="#tabs-agents">Global settings</a></li>
+			<li><a href="#tabs-anti">Antispam &amp; virus</a></li>
+			<li><a href="#tabs-access">POP &amp; IMAP</a></li>
+			<li><a href="#tabs-smtp">SMTP</a></li>
+			<li><a href="#tabs-queue">Internal queue</a></li>
 		</ul>
 		<div id="tabs-agents">
 			
@@ -56,12 +58,126 @@
 				<tbody data-bind="template: { name: 'tmp_agent_list', foreach: manager.agents }">
 				</tbody>
 			</table>
-		</div>
-		<div id="tabs-antispam">
 			
-		</div>
-		<div id="tabs-antivirus">
+			<br />
 			
+			<table>
+				<tr>
+					<td>System hostname:</td>
+					<td><input type="text" data-bind="value: global.hostname" /></td>
+				</tr><tr>
+					<td>Host address:</td>
+					<td><input type="text" data-bind="value: global.hostaddr" /></td>
+				</tr><tr>
+					<td>Postmaster:</td>
+					<td><input type="text" data-bind="value: global.postmaster" /></td>
+				</tr>
+			</table>
+		</div>
+		<div id="tabs-anti">
+			<h2>Antispam</h2>
+			
+			<table>
+				<tr>
+					<td>Timeout:</td>
+					<td><input type="text" data-bind="value: antispam.timeout" /></td>
+				</tr><tr>
+					<td>Hosts:</td>
+					<td>
+						TODO
+					</td>
+				</tr>
+			</table>
+			
+			<h2>Antivirus</h2>
+			
+			<table>
+				<tr>
+					<td>Timeout:</td>
+					<td><input type="text" data-bind="value: antispam.timeout" /></td>
+				</tr><tr>
+					<td>Hosts:</td>
+					<td>
+						TODO
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="tabs-access">
+			<h2>POP 3</h2>
+			
+			<table>
+				<tr>
+					<td>Port:</td>
+					<td><input type="text" data-bind="value: pop3.port" /></td>
+				</tr><tr>
+					<td>Port (SSL):</td>
+					<td><input type="text" data-bind="value: pop3.port_ssl" /></td>
+				</tr>
+			</table>
+			
+			<h2>IMAP</h2>
+			
+			<table>
+				<tr>
+					<td>Port:</td>
+					<td><input type="text" data-bind="value: imap.port" /></td>
+				</tr><tr>
+					<td>Port (SSL):</td>
+					<td><input type="text" data-bind="value: imap.port_ssl" /></td>
+				</tr><tr>
+					<td>Max threads:</td>
+					<td><input type="text" data-bind="value: imap.threads_max" /></td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="tabs-smtp">
+			<table>
+				<tr>
+					<td>Port:</td>
+					<td><input type="text" data-bind="value: smtp.port" /></td>
+				</tr><tr>
+					<td>Port (SSL):</td>
+					<td><input type="text" data-bind="value: smtp.port_ssl" /></td>
+				</tr><tr>
+					<td>Use relay host:</td>
+					<td><input type="checkbox" data-bind="checked: smtp.use_relay_host" /></td>
+				</tr><tr data-bind="visible: smtp.use_relay_host">
+					<td>Relay host:</td>
+					<td><input type="text" data-bind="value: smtp.relay_host" /></td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="tabs-queue">
+			<p>Trusted hosts</p>
+			
+			<p>System domains</p>
+			
+			<p>Hosted domains</p>
+			
+			<table>
+				<tr>
+					<td>Port:</td>
+					<td><input type="text" data-bind="value: queue.port" /></td>
+				</tr><tr>
+					<td>Debug mode:</td>
+					<td><input type="checkbox" data-bind="checked: queue.debug" /></td>
+				</tr><tr>
+					<td>Forward undeliverables:</td>
+					<td><input type="checkbox" data-bind="checked: queue.forwardundeliverable_enabled" /></td>
+				</tr><tr data-bind="visible: queue.forwardundeliverable_enabled">
+					<td>.... to:</td>
+					<td><input type="text" data-bind="value: queue.forwardundeliverable_to" /></td>
+				</tr><tr>
+					<td>Return bounces:</td>
+					<td><input type="checkbox" data-bind="checked: queue.bouncereturn" /></td>
+				</tr><tr>
+					<td>CC Postmaster on bounces:</td>
+					<td><input type="checkbox" data-bind="checked: queue.bounceccpostmaster" /></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	
