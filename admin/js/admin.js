@@ -9,8 +9,10 @@ Bongo.AdminTool = function(backend) {
 				data.push({name: 'command', value: 'login'});
 				$.post($this.backend, data, function (d, t, response) {
 					var result = $.parseJSON(response.responseText);
-					console.log(response.responseText);
 					if (result['status'] ==  'ok') {
+						// load the data package from Bongo
+						$this.model = ko.mapping.fromJS(result['data']);
+						ko.applyBindings($this.model);
 						$('#login-form').hide();
 						$('#admin-tool').show();
 					} else {
@@ -22,6 +24,7 @@ Bongo.AdminTool = function(backend) {
 				});
 				return false;
 			});
+			$('#admin-tabs').tabs();
 		}
 	};
 	$this.backend = backend;

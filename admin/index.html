@@ -9,8 +9,10 @@
 	
 	<script src="js/lib/jquery-1.6.2.js"></script>
 	<script src="js/lib/jquery.tmpl.js"></script>
+	<script src="js/lib/jquery-ui-1.8.14.custom.js"></script>
 	<script src="js/lib/knockout-1.2.1.js"></script>
 	<script src="js/lib/knockout.mapping-latest.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/themes/smoothness/jquery-ui-1.8.14.custom.css" />
 	
 	<script src="js/admin.js"></script>
 	<script>
@@ -33,8 +35,46 @@
 <div id="admin-tool" style="display: none">
 	<h1>Bongo Administration</h1>
 
+	<div id="admin-tabs">
+		<ul>
+			<li><a href="#tabs-agents">Agents Enabled</a></li>
+			<li><a href="#tabs-antispam">Antispam</a></li>
+			<li><a href="#tabs-antivirus">Antivirus</a></li>
+		</ul>
+		<div id="tabs-agents">
+			
+			<h2>Agents enabled on the system</h2>
+			
+			<table>
+				<thead>
+					<tr>
+						<th>Agent Name</th>
+						<th>Startup Priority</th>
+						<th>Enabled?</th>
+					</tr>
+				</thead>
+				<tbody data-bind="template: { name: 'tmp_agent_list', foreach: manager.agents }">
+				</tbody>
+			</table>
+		</div>
+		<div id="tabs-antispam">
+			
+		</div>
+		<div id="tabs-antivirus">
+			
+		</div>
+	</div>
+	
+	<button id="admin-save">Save changes</button>
 </div>
 
+<script type="text/html" id="tmp_agent_list">
+	<tr>
+		<td data-bind="text: name">Name</td>
+		<td><input size="3" data-bind="value: pri" value="-1" /></td>
+		<td><input type="checkbox" data-bind="checked: enabled" /></td>
+	</tr>
+</script>
 
 </body>
 </html>

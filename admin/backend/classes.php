@@ -32,11 +32,17 @@ class DataModule {
 			$this->store->CollectionList($callback, '/config');
 			foreach ($callback->data as $config) {
 				$file = $this->store->Read($config['id']);
-				$result[$config['name']] = json_decode($file->value, true);
+				$namebits = explode('/', $config['name']);
+				$name = $namebits[2];
+				$result[$name] = json_decode($file->value, true);
 			}
 		} catch (Exception $e) {
 			return null;
 		}
 		return $result;
+	}
+
+	function grabExtraFlags() {
+		return array();
 	}
 }

@@ -25,6 +25,7 @@ switch ($command) {
 				$result['status'] = 'ok';
 				$result['message'] = 'Login OK';
 				$result['data'] = $server->grabStoreConfig($store);
+				$result['uiflag'] = $server->grabExtraFlags();
 			} else {
 				$result['message'] = 'Username and/or password are incorrect';
 			}
