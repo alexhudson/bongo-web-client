@@ -1,6 +1,6 @@
 if (typeof(Bongo)=="undefined") Bongo = {};
 
-Bongo.AdminLogin = function(backend) {
+Bongo.AdminTool = function(backend) {
 	var $this = {
 		init: function() {
 			// set up login form.
