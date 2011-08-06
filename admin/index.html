@@ -75,21 +75,26 @@
 			<div data-bind="visible: _showSelectedDomain()">
 				<button data-bind="click: function () { _showSelectedDomain(false); } ">Close</button>
 				<h2>Domain: <span data-bind="text: _selectedDomain()">domain name</span></h2>
-				<p>Username mapping: <select data-bind="value: aliases[_selectedDomain()]['username-mapping']">
-					<option value="0">E-mail address local part is user account name</option>
-					<option value="1">Full e-mail address is user account name</option>
-					<option value="2">E-mail address domain name is user account name</option>
-				</select></p>
 				
-				<table>
-					<thead >
-						<th>Incoming local part</th>
-						<th>Maps to</th>
-					</thead>
-					<tbody data-bind="template: { name: 'tmp_domain_mapping', foreach: aliases[_selectedDomain()]['aliases'], templateOptions: { aliases: aliases, domain: _selectedDomain() } }">
-					</tbody>
-				</table>
-				<button data-bind="click: function () { admin.addMapping(); }">Add new mapping</button>
+				<p>Domain is mapped to: <input data-bind="value: aliases[_selectedDomain()]['domainalias']" /></p>
+				
+				<div data-bind="visible: aliases[_selectedDomain()]['domainalias']() == ''">
+					<p>Username mapping: <select data-bind="value: aliases[_selectedDomain()]['username-mapping']">
+						<option value="0">E-mail address local part is user account name</option>
+						<option value="1">Full e-mail address is user account name</option>
+						<option value="2">E-mail address domain name is user account name</option>
+					</select></p>
+					
+					<table>
+						<thead >
+							<th>Incoming local part</th>
+							<th>Maps to</th>
+						</thead>
+						<tbody data-bind="template: { name: 'tmp_domain_mapping', foreach: aliases[_selectedDomain()]['aliases'], templateOptions: { aliases: aliases, domain: _selectedDomain() } }">
+						</tbody>
+					</table>
+					<button data-bind="click: function () { admin.addMapping(); }">Add new mapping</button>
+				</div>
 				
 				<br />
 				<button data-bind="click: function () { admin.removeCurrentDomain(); }">Remove domain</button>
