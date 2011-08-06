@@ -66,6 +66,8 @@
 			<div data-bind="visible: ! _showSelectedDomain()">
 				<h2>Domains available</h2>
 				
+				<button data-bind="click: function() { _selectedDomain('default_config'); _showSelectedDomain(true); }">Edit fall-back configuration</button>
+				
 				<table>
 					<thead>
 						<tr>
@@ -86,8 +88,6 @@
 			<div data-bind="visible: _showSelectedDomain()">
 				<button data-bind="click: function () { _showSelectedDomain(false); } ">Close</button>
 				<h2>Domain: <span data-bind="text: _selectedDomain()">domain name</span></h2>
-				
-				<p>Domain is mapped to: <input data-bind="value: domains[_selectedDomain()]['domainalias']" /></p>
 				
 				<div data-bind="visible: domains[_selectedDomain()]['domainalias']() == ''">
 					<p>Username mapping: <select data-bind="value: domains[_selectedDomain()]['username-mapping']">
@@ -115,6 +115,17 @@
 						</tr>
 					</thead>
 					<tbody data-bind="template: { name: 'tmp_account_list', foreach: domains[_selectedDomain()].accounts }"></tbody>
+				</table>
+				
+				<h3>Domains mapped onto this configuration</h3>
+				
+				<table>
+					<thead>
+						<tr>
+							<th>Domain name</th>
+						</tr>
+					</thead>
+					<tbody data-bind="template: { name: 'tmp_mapped_domain_list', foreach: domains[_selectedDomain()].domainaliases }"></tbody>
 				</table>
 				
 				<br />
@@ -280,6 +291,12 @@
 <script type="text/html" id="tmp_account_list">
 	<tr>
 		<td data-bind="text: name">Account name</td>
+	</tr>
+</script>
+
+<script type="text/html" id="tmp_mapped_domain_list">
+	<tr>
+		<td data-bind="text: $data">Domain name</td>
 	</tr>
 </script>
 

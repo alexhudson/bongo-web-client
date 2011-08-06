@@ -110,6 +110,7 @@
 	"domains": {
 		"default_config" : {
 			"domainalias" : "",
+			"domainaliases" : [],
 			"aliases" : [ 
 				{ "from": "postmaster", "to" : "admin" }
 			],
@@ -118,6 +119,7 @@
 		},
 		"example.com" : {
 			"domainalias" : "",
+			"domainaliases" : [ "mapped.com" ],
 			"aliases" : [ 
 				{ "from": "postmaster", "to" : "admin" }
 			],
@@ -126,11 +128,16 @@
 		},
 		"another.example.com" : {
 			"domainalias" : "",
+			"domainaliases" : [],
 			"aliases" : [ 
 				{ "from": "postmaster", "to" : "admin" }
 			],
 			"username-mapping" : 1,
 			"accounts" : []
+		},
+		"mapped.com": {
+			"domainaliases" : [],
+			"domainalias" : "example.com"
 		}
 	}
 }
