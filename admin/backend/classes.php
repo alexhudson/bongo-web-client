@@ -1,6 +1,14 @@
 <?php
 
-class DataModule {
+interface DataModuleInterface {
+	function __construct($cookie);
+	function isAuthed();
+	function getCookie();
+	function grabStoreConfig();
+	function grabExtraFlags();
+}
+
+class DataModule implements DataModuleInterface {
 	private $store;
 	private $cookie;
 	private $authed;
@@ -10,7 +18,7 @@ class DataModule {
 		$this->authed = false;
 	}
 	
-	function getStoreHandle($user, $password) {
+	protected function getStoreHandle($user, $password) {
 		if (isset($this->store)) return $this->store;
 		
 		try {
@@ -71,6 +79,30 @@ class DataModule {
 		return $result;
 	}
 
+	function grabExtraFlags() {
+		return array();
+	}
+}
+
+class DataModuleDummy implements DataModuleInterface {
+	function __construct($cookie) {
+		// do nothing
+	}
+	
+	function isAuthed() {
+		return true;
+	}
+	
+	function getCookie() {
+		return 'testcookie';
+	}
+	
+	function grabStoreConfig() {
+		$root = getenv('BONGO_ROOT');
+		$test_data = file_get_contents($root . '/test/server-config.json');
+		return json_decode($test_data);
+	}
+	
 	function grabExtraFlags() {
 		return array();
 	}

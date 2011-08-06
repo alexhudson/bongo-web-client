@@ -15,26 +15,28 @@ $command = $_POST['command'];
 $cookie = null;
 if (isset($_GET['cookie'])) $cookie = $_GET['cookie'];
 if (isset($_POST['cookie'])) $cookie = $_POST['cookie'];
-$server = new DataModule($cookie);
+
+$mode = getenv('APPLICATION_ENV');
+if ($mode == 'testing') {
+	$server = new DataModuleDummy($cookie);
+} else {
+	$server = new DataModule($cookie);
+}
 
 $result = array('status' => 'fail', 'message' => 'Unknown error');
 
 switch ($command) {
 	case 'login':
-		$store = $server->getStoreHandle($_POST['name'], $_POST['password']);
-		if ($store !== null) {
-			if ($server->isAuthed()) {
-				$result['status'] = 'ok';
-				$result['message'] = 'Login OK';
-				$result['cookie'] = $server->getCookie();
-				$result['data'] = $server->grabStoreConfig($store);
-				$result['uiflag'] = $server->grabExtraFlags();
-			} else {
-				$result['message'] = 'Username and/or password are incorrect';
-			}
+		if ($server->isAuthed()) {
+			$result['status'] = 'ok';
+			$result['message'] = 'Login OK';
+			$result['cookie'] = $server->getCookie();
+			$result['data'] = $server->grabStoreConfig($store);
+			$result['uiflag'] = $server->grabExtraFlags();
 		} else {
-			$result['message'] = 'Could not connect to Bongo Store';
+			$result['message'] = 'Username and/or password are incorrect';
 		}
+		// TODO : Need to detect "cannot connect" error condition
 		break;
 	default:
 		$result['message'] = 'Unknown command used: ' . $command;
