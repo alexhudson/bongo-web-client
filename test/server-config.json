@@ -58,7 +58,7 @@
 		"minimumfreespace":5242880,
 		"rtsantispamconfig_threshold":0,
 		"rtsantispamconfig_delay":0,
-		"domains":[],
+		"domains":[ "example.com", "another.example.com" ],
 		"hosteddomains":[],
 		"port":8670,
 		"queuetuning_concurrent":250,
@@ -105,5 +105,29 @@
 		"socket_timeout":600,
 		"max_mx_servers":20,
 		"require_auth":true
+	},
+	
+	"aliases": {
+		"default_config" : {
+			"domainalias" : "",
+			"aliases" : [ 
+				{ "from: "postmaster", "to" : "admin" }
+			],
+			"username-mapping" : 0
+		},
+		"example.com" : {
+			"domainalias" : "",
+			"aliases" : [ 
+				{ "from: "postmaster", "to" : "admin" }
+			],
+			"username-mapping" : 1
+		},
+		"another.example.com" : {
+			"domainalias" : "",
+			"aliases" : [ 
+				{ "from: "postmaster", "to" : "admin" }
+			],
+			"username-mapping" : 2
+		}
 	}
 }

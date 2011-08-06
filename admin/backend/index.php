@@ -3,9 +3,11 @@
 /* Backend administrative server
  */
 
-$root = getenv('BONGO_ROOT');
+error_reporting(E_ALL | E_STRICT | E_NOTICE);
+ini_set('display_errors', 'On');
+ini_set('display_startup_errors', true);
 
-error_reporting(E_ALL & E_STRICT);
+$root = getenv('BONGO_ROOT');
 define("BONGO_AUTO_LOAD", $root . '/library');
 require_once($root . 'library/Bongo.php');
 require_once('classes.php');
@@ -27,16 +29,36 @@ $result = array('status' => 'fail', 'message' => 'Unknown error');
 
 switch ($command) {
 	case 'login':
+		if (isset($_POST['name']) && isset($_POST['password']))
+			$server->authUser($_POST['name'], $_POST['password']);
+		
 		if ($server->isAuthed()) {
 			$result['status'] = 'ok';
 			$result['message'] = 'Login OK';
 			$result['cookie'] = $server->getCookie();
-			$result['data'] = $server->grabStoreConfig($store);
+			$result['data'] = $server->grabStoreConfig();
 			$result['uiflag'] = $server->grabExtraFlags();
 		} else {
-			$result['message'] = 'Username and/or password are incorrect';
+			$result['message'] = $server->authErrorCondition();
 		}
 		// TODO : Need to detect "cannot connect" error condition
+		break;
+	case 'savedata':
+		if ($server->isAuthed()) {
+			try {
+				$dataset = json_decode($_POST['data'], true);
+				$message = $server->saveData($dataset);
+			} catch (Exception $e) {
+				$message = "Couldn't decode data";
+			}
+			if (isset($message)) {
+				$result['message'] = $message;
+			} else {
+				$result['status'] = 'ok';
+			}
+		} else {
+			$result['message'] = 'Cookie timed out';
+		}
 		break;
 	default:
 		$result['message'] = 'Unknown command used: ' . $command;
