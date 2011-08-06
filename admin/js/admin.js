@@ -53,6 +53,10 @@ Bongo.AdminTool = function(backend) {
 			
 			$this.original_data = $.extend(true, {}, result['data']);
 			$this.model = ko.mapping.fromJS(result['data']);
+			
+			$this.model._selectedDomain = ko.observable('default_config');
+			$this.model._showSelectedDomain = ko.observable(false);
+			
 			ko.applyBindings($this.model);
 			$('#login-form').hide();
 			$('#admin-tool').show();
@@ -71,6 +75,13 @@ Bongo.AdminTool = function(backend) {
 				}
 			}, 'json').error(function () {
 				alert('Something went wrong saving data');
+			});
+		}, 
+		
+		addMapping: function () {
+			this.model.aliases[this.model._selectedDomain()]['aliases'].push({
+				from: ko.observable('from'),
+				to: ko.observable('to')
 			});
 		}
 	};

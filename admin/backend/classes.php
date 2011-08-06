@@ -88,12 +88,21 @@ class DataModule implements DataModuleInterface {
 			}
 			
 			// look for domain information
-			$domains = $result['queue']['domains'];
-			array_unshift($domains, 'default_config');
+			array_unshift($result['queue']['domains'], 'default_config');
 			$result['aliases'] = array();
-			foreach ($domains as $domain) {
+			foreach ($result['queue']['domains'] as $domain) {
 				$domain_config = $this->store->Read('/config/aliases/' . $domain);
 				$result['aliases'][$domain] = json_decode($domain_config->value, true);
+				
+				// change alias mapping to something more amenable.
+				$list = $result['aliases'][$domain]['aliases'];
+				
+				$newlist = array();
+				foreach ($list as $from => $to) {
+					array_push($newlist, array('from' => $from, 'to' => $to));
+				}
+				
+				$result['aliases'][$domain]['aliases'] = $newlist;
 			}
 		} catch (Exception $e) {
 			return null;
@@ -102,7 +111,10 @@ class DataModule implements DataModuleInterface {
 	}
 
 	public function grabExtraFlags() {
-		return array();
+		return array(
+			'selected_domain' => 'default_config',
+			'show_selected_domain' => false
+		);
 	}
 
 	public function saveData($dataset) {
@@ -120,6 +132,14 @@ class DataModule implements DataModuleInterface {
 		
 		foreach ($dataset['aliases'] as $domain => $configitems) {
 			$filename = "/config/aliases/$domain";
+			
+			// put the alias structure back the way it was
+			$aliases = $configitems['aliases'];
+			$configitems['aliases'] = array();
+			foreach ($aliases as $alias) {
+				$configitems['aliases'][$alias['from']] = $alias['to'];
+			}
+			
 			$content = json_encode($configitems);
 			if ($content != '')
 				$this->store->Replace($filename, $content);

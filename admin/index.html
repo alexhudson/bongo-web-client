@@ -17,8 +17,9 @@
 	
 	<script src="js/admin.js"></script>
 	<script>
+	var admin;
 	$(function() {
-		var admin = new Bongo.AdminTool('/admin/backend/index.php');
+		admin = new Bongo.AdminTool('/admin/backend/index.php');
 		admin.init();
 	});
 	</script>
@@ -51,13 +52,31 @@
 			<li><a href="#tabs-queue">Internal queue</a></li>
 		</ul>
 		<div id="tabs-domains">
-			<h2>Domains available</h2>
+			<div data-bind="visible: ! _showSelectedDomain()">
+				<h2>Domains available</h2>
+				
+				<ul data-bind="template: { name: 'tmp_domain_list', foreach: queue.domains, templateOptions: { selected: _selectedDomain, showSelected: _showSelectedDomain } }">
+				</ul>
+			</div>
 			
-			<ul data-bind="template: { name: 'tmp_domain_list', foreach: queue.domains }">
-			</ul>
-			
-			<div>
-				<p>Username mapping: <input type="text" data-bind="value: selected_domain" /></p>
+			<div data-bind="visible: _showSelectedDomain()">
+				<button data-bind="click: function () { _showSelectedDomain(false); } ">Close</button>
+				<h2 data-bind="text: _selectedDomain()">domain name</h2>
+				<p>Username mapping: <select data-bind="value: aliases[_selectedDomain()]['username-mapping']">
+					<option value="0">E-mail address local part is user account name</option>
+					<option value="1">Full e-mail address is user account name</option>
+					<option value="2">E-mail address domain name is user account name</option>
+				</select></p>
+				
+				<table>
+					<thead >
+						<th>Incoming local part</th>
+						<th>Maps to</th>
+					</thead>
+					<tbody data-bind="template: { name: 'tmp_domain_mapping', foreach: aliases[_selectedDomain()]['aliases'], templateOptions: { aliases: aliases, domain: _selectedDomain() } }">
+					</tbody>
+				</table>
+				<button data-bind="click: function () { admin.addMapping(); }">Add new mapping</button>
 			</div>
 		</div>
 		<div id="tabs-agents">
@@ -203,8 +222,16 @@
 
 <script type="text/html" id="tmp_domain_list">
 	<li>
-		<a data-bind="text: $data">domain</a>
+		<a data-bind="text: $data, click: function() { $item.selected($data); $item.showSelected(true); }">domain</a>
 	</li>
+</script>
+
+<script type="text/html" id="tmp_domain_mapping">
+	<tr>
+		<td><input type="text" data-bind="value: from" /></td>
+		<td><input type="text" data-bind="value: to" /></td>
+		<td><button data-bind="click: function () { $item.aliases[$item.domain]['aliases'].remove($data); }">Remove</button></td>
+	</tr>
 </script>
 
 </body>
