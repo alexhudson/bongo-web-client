@@ -64,9 +64,9 @@ class DataModule implements DataModuleInterface {
 		return $this->cookie;
 	}
 
-	public function collectDocumentsFromList($response, &$callback) {
+	public function collectDocumentsFromList($response, &$data) {
 		if (($response->response_code == 2001) && ($response->type != Bongo::DOC_COLLECTION)) {
-			array_push($callback->data, array(
+			array_push($data, array(
 				'id' => $response->guid,
 				'name' => $response->name
 			));
