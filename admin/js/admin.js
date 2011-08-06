@@ -15,7 +15,7 @@ Bongo.AdminTool = function(backend) {
 			});
 			$('#admin-logout').click(function() {
 				$.cookie('bongo_admin_cookie', 'unset', { expires: -1, path: '/' });
-				$('#login-form').show();
+				$('#login-pane').show();
 				$('#admin-tool').hide();
 			});
 			$('#admin-save').click(function () {
@@ -26,11 +26,11 @@ Bongo.AdminTool = function(backend) {
 			
 			var existing_cookie = $.cookie('bongo_admin_cookie');
 			if (existing_cookie) {
-				$('#login-form').hide();
+				$('#login-pane').hide();
 				// TODO: show some kind of holding thing?
 				$this.loadData({ command: 'login', cookie: existing_cookie },
 					function() {
-						$('#login-form').show();
+						$('#login-pane').show();
 					});
 			}
 		},
@@ -59,7 +59,7 @@ Bongo.AdminTool = function(backend) {
 			$this.model._showAddDomain = ko.observable(false);
 			
 			ko.applyBindings($this.model);
-			$('#login-form').hide();
+			$('#login-pane').hide();
 			$('#admin-tool').show();
 		},
 		
@@ -80,7 +80,7 @@ Bongo.AdminTool = function(backend) {
 		}, 
 		
 		addMapping: function () {
-			this.model.aliases[this.model._selectedDomain()]['aliases'].push({
+			this.model.domains[this.model._selectedDomain()]['aliases'].push({
 				from: ko.observable('from'),
 				to: ko.observable('to')
 			});
@@ -92,7 +92,7 @@ Bongo.AdminTool = function(backend) {
 				this.model.queue.domains.push(name);
 				var aliases = ko.observableArray();
 				aliases.push({ from: ko.observable('postmaster'), to: ko.observable('admin') });
-				this.model.aliases[name] = {
+				this.model.domains[name] = {
 					'domainalias': ko.observable(''),
 					'aliases': aliases,
 					'username-mapping': ko.observable(0)

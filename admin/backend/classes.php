@@ -88,21 +88,61 @@ class DataModule implements DataModuleInterface {
 			}
 			
 			// look for domain information
-			array_unshift($result['queue']['domains'], 'default_config');
-			$result['aliases'] = array();
-			foreach ($result['queue']['domains'] as $domain) {
+			$result['domains'] = array();
+			$domain_maps = array();
+			
+			// FIXME: do I really need to co-erce this to a simple array? :(
+			$result['queue']['domains'] = array_values($result['queue']['domains']);
+			
+			$domains = $result['queue']['domains'];
+			array_unshift($domains, 'default_config');
+			foreach ($domains as $domain) {
 				$domain_config = $this->store->Read('/config/aliases/' . $domain);
-				$result['aliases'][$domain] = json_decode($domain_config->value, true);
+				$config = json_decode($domain_config->value, true);
 				
+				if (isset($config['domainalias']) && ($config['domainalias'] != '')) {
+					$domain_maps[$domain] = $config['domainalias'];
+				}
+				
+				$config['name'] = $domain;
+				$result['domains'][$domain] = $config;
 				// change alias mapping to something more amenable.
-				$list = $result['aliases'][$domain]['aliases'];
+				$list = $result['domains'][$domain]['aliases'];
 				
 				$newlist = array();
 				foreach ($list as $from => $to) {
 					array_push($newlist, array('from' => $from, 'to' => $to));
 				}
 				
-				$result['aliases'][$domain]['aliases'] = $newlist;
+				$result['domains'][$domain]['domainaliases'] = array();
+				$result['domains'][$domain]['aliases'] = $newlist;
+				$result['domains'][$domain]['accounts'] = array();
+			}
+			// merge the mapped domains information back in - do this afterwards
+			// so we know we've already loaded the main config
+			foreach ($domain_maps as $from => $to) {
+				if (isset($result['domains'][$to])) {
+					array_push($result['domains'][$to]['domainaliases'], $from);
+				}
+				// if there is no domain to stick it on, we have a config
+				// problem that we ought to report really... FIXME
+			}
+			
+			// look for user accounts
+			$userCallback = new Bongo_StoreCallback(null, function($resp, &$data) {
+				array_push($data, $resp->name);
+			}, array());
+			$userCallback->data = array();
+			$this->store->Store();
+			$this->store->AccountList($userCallback);
+			foreach ($userCallback->data as $account) {
+				$acpos = strpos($account, '@');
+				if ($acpos === false) {
+					array_push($result['domains']['default_config']['accounts'], array('name'=>$account));
+				} else {
+					$domain = substr($account, $acpos+1);
+					array_push($result['domains'][$domain]['accounts'], array('name'=>$account));
+				}
 			}
 		} catch (Exception $e) {
 			return null;
@@ -119,9 +159,6 @@ class DataModule implements DataModuleInterface {
 
 	public function saveData($dataset) {
 		$this->store->Store('_system');
-		
-		// remove data hacks
-		$dataset['queue']['domains'] = array_filter($dataset['queue']['domains'], function ($var) { return ($var != 'default_config'); });
 		
 		// save current data
 		foreach ($dataset as $config => $configitems) {
