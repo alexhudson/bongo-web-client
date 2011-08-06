@@ -14,7 +14,7 @@ Bongo.AdminTool = function(backend) {
 				return false;
 			});
 			$('#admin-logout').click(function() {
-				$.cookie('bongo_admin_cookie', null);
+				$.cookie('bongo_admin_cookie', 'unset', { expires: -1, path: '/' });
 				$('#login-form').show();
 				$('#admin-tool').hide();
 			});
