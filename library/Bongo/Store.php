@@ -286,4 +286,27 @@ class Bongo_Store extends Bongo_CommandStream
 			throw new Bongo_StoreException("Can't write document");
 		}
 	}
+	
+	public function AccountCreate($username, $password) {
+		$this->SendCommand("ACCOUNT CREATE $username $password");
+		return $this->GetLineResponse();
+	}
+	
+	public function AccountDelete($username) {
+		$this->SendCommand("ACCOUNT DELETE $username");
+		return $this->GetLineResponse();
+	}
+	
+	public function AccountList(Bongo_StoreCallback $callback) {
+		$this->SendCommand("ACCOUNT LIST");
+		
+		while(TRUE) {
+			$response = $this->GetLineResponse('Bongo_CommandStreamResponse_AccountList');
+			if ($response->response_code == 2001) {
+				$this->doCallback($callback, $response);
+			} else {
+				return $response;
+			}
+		}
+	}
 }

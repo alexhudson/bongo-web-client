@@ -64,6 +64,20 @@ class Bongo_CommandStreamResponse_Stores extends Bongo_CommandStreamResponse
 	}
 }
 
+// 2001 <accountname>
+class Bongo_CommandStreamResponse_AccountList extends Bongo_CommandStreamResponse
+{
+	public $name;
+	
+	public function ProcessResponse($data) {
+		if ($this->response_code == 2001) {
+			$bits = explode(" ", $data);
+			
+			$this->name = $bits[0];
+		}
+	}
+}
+
 class Bongo_CommandStreamResponse_Collections extends Bongo_CommandStreamResponse 
 {
 	public $guid;
