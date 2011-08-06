@@ -80,7 +80,7 @@ Bongo.AdminTool = function(backend) {
 		}, 
 		
 		addMapping: function () {
-			this.model.aliases[this.model._selectedDomain()]['aliases'].push({
+			this.model.domains[this.model._selectedDomain()]['aliases'].push({
 				from: ko.observable('from'),
 				to: ko.observable('to')
 			});
@@ -92,7 +92,7 @@ Bongo.AdminTool = function(backend) {
 				this.model.queue.domains.push(name);
 				var aliases = ko.observableArray();
 				aliases.push({ from: ko.observable('postmaster'), to: ko.observable('admin') });
-				this.model.aliases[name] = {
+				this.model.domains[name] = {
 					'domainalias': ko.observable(''),
 					'aliases': aliases,
 					'username-mapping': ko.observable(0)

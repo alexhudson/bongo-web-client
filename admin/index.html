@@ -44,7 +44,7 @@
 
 	<div id="admin-tabs">
 		<ul>
-			<li><a href="#tabs-accounts">Accounts</a></li>
+			<li><a href="#tabs-accounts">Global Accounts</a></li>
 			<li><a href="#tabs-domains">Domains</a></li>
 			<li><a href="#tabs-agents">Global settings</a></li>
 			<li><a href="#tabs-anti">Antispam &amp; virus</a></li>
@@ -59,7 +59,7 @@
 						<th>Login name</th>
 					</tr>
 				</thead>
-				<tbody data-bind="template: { name: 'tmp_account_list', foreach: accounts }"></tbody>
+				<tbody data-bind="template: { name: 'tmp_account_list', foreach: domains['default_config'].accounts }"></tbody>
 			</table>
 		</div>
 		<div id="tabs-domains">
@@ -87,10 +87,10 @@
 				<button data-bind="click: function () { _showSelectedDomain(false); } ">Close</button>
 				<h2>Domain: <span data-bind="text: _selectedDomain()">domain name</span></h2>
 				
-				<p>Domain is mapped to: <input data-bind="value: aliases[_selectedDomain()]['domainalias']" /></p>
+				<p>Domain is mapped to: <input data-bind="value: domains[_selectedDomain()]['domainalias']" /></p>
 				
-				<div data-bind="visible: aliases[_selectedDomain()]['domainalias']() == ''">
-					<p>Username mapping: <select data-bind="value: aliases[_selectedDomain()]['username-mapping']">
+				<div data-bind="visible: domains[_selectedDomain()]['domainalias']() == ''">
+					<p>Username mapping: <select data-bind="value: domains[_selectedDomain()]['username-mapping']">
 						<option value="0">E-mail address local part is user account name</option>
 						<option value="1">Full e-mail address is user account name</option>
 						<option value="2">E-mail address domain name is user account name</option>
@@ -101,11 +101,22 @@
 							<th>Incoming local part</th>
 							<th>Maps to</th>
 						</thead>
-						<tbody data-bind="template: { name: 'tmp_domain_mapping', foreach: aliases[_selectedDomain()]['aliases'], templateOptions: { aliases: aliases, domain: _selectedDomain() } }">
+						<tbody data-bind="template: { name: 'tmp_domain_mapping', foreach: domains[_selectedDomain()]['aliases'], templateOptions: { domains: domains, domain: _selectedDomain() } }">
 						</tbody>
 					</table>
 					<button data-bind="click: function () { admin.addMapping(); }">Add new mapping</button>
 				</div>
+				
+				<h3>Domain Accounts</h3>
+				
+				<table>
+					<thead>
+						<tr>
+							<th>Login name</th>
+						</tr>
+					</thead>
+					<tbody data-bind="template: { name: 'tmp_account_list', foreach: domains[_selectedDomain()].accounts }"></tbody>
+				</table>
 				
 				<br />
 				<button data-bind="click: function () { admin.removeCurrentDomain(); }">Remove domain</button>
@@ -263,7 +274,7 @@
 	<tr>
 		<td><input type="text" data-bind="value: from" /></td>
 		<td><input type="text" data-bind="value: to" /></td>
-		<td><button data-bind="click: function () { $item.aliases[$item.domain]['aliases'].remove($data); }">Remove</button></td>
+		<td><button data-bind="click: function () { $item.domains[$item.domain]['aliases'].remove($data); }">Remove</button></td>
 	</tr>
 </script>
 

@@ -89,24 +89,24 @@ class DataModule implements DataModuleInterface {
 			
 			// look for domain information
 			array_unshift($result['queue']['domains'], 'default_config');
-			$result['aliases'] = array();
+			$result['domains'] = array();
 			foreach ($result['queue']['domains'] as $domain) {
 				$domain_config = $this->store->Read('/config/aliases/' . $domain);
-				$result['aliases'][$domain] = json_decode($domain_config->value, true);
+				$result['domains'][$domain] = json_decode($domain_config->value, true);
 				
 				// change alias mapping to something more amenable.
-				$list = $result['aliases'][$domain]['aliases'];
+				$list = $result['domains'][$domain]['aliases'];
 				
 				$newlist = array();
 				foreach ($list as $from => $to) {
 					array_push($newlist, array('from' => $from, 'to' => $to));
 				}
 				
-				$result['aliases'][$domain]['aliases'] = $newlist;
+				$result['domains'][$domain]['aliases'] = $newlist;
+				$result['domains'][$domain]['accounts'] = array();
 			}
 			
 			// look for user accounts
-			$result['accounts'] = array();
 			$userCallback = new Bongo_StoreCallback(null, function($resp, &$data) {
 				array_push($data, $resp->name);
 			}, array());
@@ -114,7 +114,13 @@ class DataModule implements DataModuleInterface {
 			$this->store->Store();
 			$this->store->AccountList($userCallback);
 			foreach ($userCallback->data as $account) {
-				array_push($result['accounts'], array( 'name' => $account));
+				$acpos = strpos($account, '@');
+				if ($acpos === false) {
+					array_push($result['domains']['default_config']['accounts'], array('name'=>$account));
+				} else {
+					$domain = substr($account, $acpos+1);
+					array_push($result['domains'][$domain]['accounts'], array('name'=>$account));
+				}
 			}
 		} catch (Exception $e) {
 			return null;

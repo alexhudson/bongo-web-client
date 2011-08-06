@@ -107,32 +107,30 @@
 		"require_auth":true
 	},
 	
-	"aliases": {
+	"domains": {
 		"default_config" : {
 			"domainalias" : "",
 			"aliases" : [ 
 				{ "from": "postmaster", "to" : "admin" }
 			],
-			"username-mapping" : 0
+			"username-mapping" : 0,
+			"accounts" : [ { "name": "admin" } ]
 		},
 		"example.com" : {
 			"domainalias" : "",
 			"aliases" : [ 
 				{ "from": "postmaster", "to" : "admin" }
 			],
-			"username-mapping" : 1
+			"username-mapping" : 1,
+			"accounts" : [ { "name": "fred@example.com" }, { "name": "joe@example.com" } ]
 		},
 		"another.example.com" : {
 			"domainalias" : "",
 			"aliases" : [ 
 				{ "from": "postmaster", "to" : "admin" }
 			],
-			"username-mapping" : 2
+			"username-mapping" : 1,
+			"accounts" : []
 		}
-	},
-	
-	"accounts" : [
-		{ "name": "admin" },
-		{ "name": "testing" }
-	]
+	}
 }
