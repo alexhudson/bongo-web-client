@@ -2,56 +2,68 @@
 
 interface DataModuleInterface {
 	function __construct($cookie);
-	function isAuthed();
-	function getCookie();
-	function grabStoreConfig();
-	function grabExtraFlags();
+	public function authUser($username, $password);
+	public function isAuthed();
+	public function authErrorCondition();
+	public function getCookie();
+	public function grabStoreConfig();
+	public function grabExtraFlags();
 }
 
 class DataModule implements DataModuleInterface {
 	private $store;
 	private $cookie;
 	private $authed;
+	private $auth_error;
 	
 	function __construct($cookie) {
 		$this->cookie = $cookie;
 		$this->authed = false;
-	}
-	
-	protected function getStoreHandle($user, $password) {
-		if (isset($this->store)) return $this->store;
+		$this->auth_error = 'No error';
 		
 		try {
 			$this->store = new Bongo_Store('127.0.0.1', 689);
 		} catch (Exception $e) {
+			$this->auth_error = 'Could not connect to Bongo store';
 			return null;
 		}
+	}
+	
+	public function authUser($user, $password) {
+		if (! isset($this->store)) return;
 		
-		if (isset($this->cookie)) {
+		$res = $this->store->AuthUser($user, $password);
+		if ($res->response_code == 1000) {
+			$this->authed = true;
+			$this->cookie = $this->store->CookieBake(60*60*24);
+		} else {
+			$this->auth_error = 'Username and/or password are incorrect';
+		}
+	}
+
+	public function isAuthed() {
+		if (! isset($this->store)) return false;
+		
+		if (($this->authed === false) && isset($this->cookie)) {
 			$res = $this->store->AuthCookie('admin', $this->cookie);
 			if ($res->response_code == 1000) {
 				$this->authed = true;
-			}
-		} elseif (isset($password)) {
-			$res = $this->store->AuthUser($user, $password);
-			if ($res->response_code == 1000) {
-				$this->authed = true;
-				$this->cookie = $this->store->CookieBake(60*60*24);
+			} else {
+				$this->auth_error = 'Cookie is invalid.';
 			}
 		}
-		
-		return $this->store;
-	}
-
-	function isAuthed() {
 		return $this->authed;
 	}
 
-	function getCookie() {
+	public function authErrorCondition() {
+		return $this->auth_error;
+	}
+
+	public function getCookie() {
 		return $this->cookie;
 	}
 
-	function collectDocumentsFromList($response, &$callback) {
+	public function collectDocumentsFromList($response, &$callback) {
 		if (($response->response_code == 2001) && ($response->type != Bongo::DOC_COLLECTION)) {
 			array_push($callback->data, array(
 				'id' => $response->guid,
@@ -60,11 +72,11 @@ class DataModule implements DataModuleInterface {
 		}
 	}
 
-	function grabStoreConfig() {
+	public function grabStoreConfig() {
 		$result = array();
 		try {
 			$this->store->Store('_system');
-			$callback = new Bongo_StoreCallback($this, 'collectDocumentsFromList');
+			$callback = new Bongo_StoreCallback($this, 'collectDocumentsFromList', null);
 			$callback->data = array();
 			$this->store->CollectionList($callback, '/config');
 			foreach ($callback->data as $config) {
@@ -79,7 +91,7 @@ class DataModule implements DataModuleInterface {
 		return $result;
 	}
 
-	function grabExtraFlags() {
+	public function grabExtraFlags() {
 		return array();
 	}
 }
@@ -89,21 +101,29 @@ class DataModuleDummy implements DataModuleInterface {
 		// do nothing
 	}
 	
-	function isAuthed() {
+	public function authUser($user, $password) {
+		return;
+	}
+	
+	public function isAuthed() {
 		return true;
 	}
 	
-	function getCookie() {
+	public function getCookie() {
 		return 'testcookie';
 	}
 	
-	function grabStoreConfig() {
+	public function authErrorCondition() {
+		return 'No error';
+	}
+	
+	public function grabStoreConfig() {
 		$root = getenv('BONGO_ROOT');
 		$test_data = file_get_contents($root . '/test/server-config.json');
 		return json_decode($test_data);
 	}
 	
-	function grabExtraFlags() {
+	public function grabExtraFlags() {
 		return array();
 	}
 }
