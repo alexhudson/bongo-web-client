@@ -10,7 +10,6 @@
 	<script src="js/lib/jquery-1.6.2.js"></script>
 	<script src="js/lib/jquery.tmpl.js"></script>
 	<script src="js/lib/jquery.cookie.js"></script>
-	<script src="js/lib/jquery.diff.js"></script>
 	<script src="js/lib/jquery-ui-1.8.14.custom.js"></script>
 	<script src="js/lib/knockout-1.2.1.js"></script>
 	<script src="js/lib/knockout.mapping-latest.js"></script>
@@ -44,12 +43,23 @@
 
 	<div id="admin-tabs">
 		<ul>
+			<li><a href="#tabs-domains">Domains</a></li>
 			<li><a href="#tabs-agents">Global settings</a></li>
 			<li><a href="#tabs-anti">Antispam &amp; virus</a></li>
 			<li><a href="#tabs-access">POP &amp; IMAP</a></li>
 			<li><a href="#tabs-smtp">SMTP</a></li>
 			<li><a href="#tabs-queue">Internal queue</a></li>
 		</ul>
+		<div id="tabs-domains">
+			<h2>Domains available</h2>
+			
+			<ul data-bind="template: { name: 'tmp_domain_list', foreach: queue.domains }">
+			</ul>
+			
+			<div>
+				<p>Username mapping: <input type="text" data-bind="value: selected_domain" /></p>
+			</div>
+		</div>
 		<div id="tabs-agents">
 			
 			<h2>Agents enabled on the system</h2>
@@ -158,12 +168,6 @@
 		</div>
 		
 		<div id="tabs-queue">
-			<p>Trusted hosts</p>
-			
-			<p>System domains</p>
-			
-			<p>Hosted domains</p>
-			
 			<table>
 				<tr>
 					<td>Port:</td>
@@ -197,10 +201,10 @@
 	</tr>
 </script>
 
-<script type="text/html" id="tmp_antivirus_hosts">
-	<tr>
-		
-	</tr>
+<script type="text/html" id="tmp_domain_list">
+	<li>
+		<a data-bind="text: $data">domain</a>
+	</li>
 </script>
 
 </body>
