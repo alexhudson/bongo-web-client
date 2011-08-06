@@ -3,4 +3,10 @@
 	width: 400px;
 	margin: 10em auto;
 	padding: 2em;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 3px 3px 4px 3px #000000;
+	-moz-box-shadow: 3px 3px 4px 3px #000000;
+	box-shadow: 3px 3px 4px 3px #000000;
 }

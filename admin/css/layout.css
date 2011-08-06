@@ -1,0 +1,1225 @@
+/* Reset a few things to start with a pretty clean slate */
+html, body,
+h1, h2, h3, h4, h5, h6,
+div,
+ul, ol, li,
+dl, dt, dd,
+form
+{
+    margin: 0; padding: 0;
+}
+
+p { 
+  margin: 0.5em 0;
+}
+input, select, option, table {
+    font-family: inherit;
+    font-size: inherit;
+    /* we probably shouldn't inherit the color without inheriting
+       background */
+    /* color: inherit; */
+}
+
+h2 {
+    padding: 1em 1em 0;
+}
+
+/*
+table {
+    border-collapse: collapse;
+}
+*/
+li {
+    list-style: none;
+}
+
+/* Disable the click focus ring -- still leaves the tabbed focus ring intact */
+a:active {
+    outline: none;
+}
+
+td { vertical-align: top; }
+
+/* Begin the real stuff */
+html, body { overflow: hidden; }
+
+body {
+    background-color: #e4eaf4;
+    color: #000;
+}
+    body.os-x11 { 
+        font-family: lucida grande, myriad, myriad pro, verdana, luxi sans, bitstream vera sans, sans-serif;
+        font-size: 0.9em; 
+    }
+    body.os-mac { 
+        font-family: lucida grande, myriad, verdana, luxi sans, bitstream vera sans, sans-serif;
+        font-size: 0.85em; 
+    }
+    body.os-win { 
+        font-family: tahoma, myriad, sans-serif;
+        font-size: 0.8em; 
+    }
+    body.os-win.eng-msie.engv-6 { 
+        /* IE6 doesn't have ClearType font smoothing on by default; other browsers on Windows do, including IE7 */
+        font-family: arial, tahoma, myriad, sans-serif;
+    }
+
+#page-header,
+#section-user,
+#notification,
+#searchtext,
+#section-sidebar,
+#sidebox-sourcelist,
+#sidebox-actions,
+#sidebox-summary,
+#section-content,
+#toolbar,
+#searchbar,
+#section-list,
+#section-itemview,
+#sidebox-upcoming {
+    /*
+    border: 1px solid red;
+    */
+}
+
+a,
+a * {
+  /* One cursor for everyone but Win/IE, the other for only Win/IE */
+  cursor: pointer;
+  cursor: hand; 
+}
+a {
+    text-decoration: none;
+}
+
+a img { 
+  border: 0;
+}
+
+#content { }
+
+#page-header td.header-cell {
+    border-top: 4px solid #ffac35;
+}
+
+a {
+    color: #517faf;
+}
+:visited {
+    color: #a98ba6;
+    color: #517faf;
+}
+:active {
+}
+a:hover {
+    text-decoration: underline;
+    color: #f57900;
+}
+
+/* We should not have <a name=""> in Bongo, but just to be sure... */
+a[name] {
+    color: inherit;
+    text-decoration: inherit;
+    cursor: inherit;
+}
+
+.right {
+    float: right;
+}
+    
+#page-header {
+    /* Position is relative so that children will treat the container as the region for absolute */
+    position: relative;
+}
+#page-header td {
+    vertical-align: middle;
+}
+
+#logo {
+  vertical-align: middle;
+  padding: 10px 15px 10px;
+}
+
+#user-name {
+    font-weight: bold;
+    font-size: 1.3em;
+    letter-spacing: -1px;
+    color: #fff;
+}
+
+#section-user {
+    color: #999;
+    font-size: x-small;
+}
+    #section-user ul,
+    #section-user li {
+        display: inline;
+        list-style: none;
+    }
+    #section-user li a {
+        margin: 0 0 0 1ex;
+        color: #e4eaf4;
+        border-bottom: 1px dotted #7a9ac9;
+    }
+    #section-user li a:hover {
+        text-decoration: none;
+        border-bottom: 1px dotted #e4eaf4;
+    }
+
+#top-gradient {
+  width: 288px;
+  background: transparent repeat-y center;
+  vertical-align: middle;
+  background-image: url(../images/top-gradient.png);
+}
+#notification {
+    left: auto;
+    top: 1.25em;
+    left: 80ex;
+    font-size: 85%;
+    background-color: #ad7fa8;
+    color: #fff;
+    padding: 0.5em 1em;
+    position: absolute;
+    display: none;
+    /* This should really be on top */
+    z-index: 101;
+}
+#notification.error { background-color: #f00; }
+
+#search {
+    padding-bottom: 0.25em;
+    margin: 1ex 0;
+    white-space: nowrap;
+    font-size: 86%;
+    padding: 0 1ex;
+}
+    #search-entry { 
+        width: 28ex; 
+        margin-top: 3px;
+    }
+    #search label { color: #555; }
+
+    /* Hide the search buttons for Safari */
+    body.eng-webkit #search input[type="button"] { display: none; }
+
+#page-frame {
+    background: #1d3980 url(../images/login-bg-bottom.png) repeat-x 0 0;
+    background: #e7e4ef url(../images/bg-page.png) repeat-x 0 0;
+    width: 100%;
+    height: 100%;
+}
+body.eng-msie #page-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#page-frame td {
+    /*  
+    border: 1px solid red; 
+    */
+}
+
+.right-spacer { 
+    /*
+  width: 1em;
+  */
+}
+
+#section-sidebar,
+#section-content {
+    /* Each section */
+    vertical-align: top;
+    height: 100%;
+    position: relative;
+}
+
+    #section-sidebar {
+        width: 14.5em;
+    }
+    #sidebar-nav {
+        min-width: 120px;
+        margin: 0 0 0 12px;
+        padding: 0px 0 15px;
+        z-index: 5;
+        position: relative;
+        background-color: #fff;
+        border: 1px solid #5f85bf;
+        border-width: 1px 0 1px 1px;
+    }
+
+    #sidebar-tabs-small,
+    .low-res #sidebar-tabs-large { 
+        display: none;
+    }
+
+    #sidebar-tabs-large,
+    .low-res #sidebar-tabs-small { 
+        display: block;
+    }
+
+    #sidebar-tabs-small { 
+        margin-top: 1ex;
+        margin-left: 1ex;
+    }
+
+        /* Sidebar rounded corners skin */
+        /*
+        #sidebar-nav .t { background-image: url(../images/side-tl.png); }
+        #sidebar-nav .tr { background-image: url(../images/side-tr.png); }
+        #sidebar-nav .b { background-image: url(../images/side-bl.png); }
+        #sidebar-nav .br { background-image: url(../images/side-br.png); }
+        #sidebar-nav .c { background-image: url(../images/side-cl.png); }
+        #sidebar-nav .cr { background-image: url(../images/side-cr.png); }
+        */
+
+        #sidebar-nav .action { 
+            padding: 0 0 0 2.5em;
+            font-size: 85%;
+        }
+
+        #sidebar-nav .tab {
+            padding: 1px 0;
+            letter-spacing: 0;
+            font-size: 100%;
+            text-align: left;
+            border-width: 0;
+            margin: 0.75em 0 0.25em;
+            -moz-border-radius: 0;
+        }
+
+            #sidebar-nav .tab a {
+                display: block;
+                font-size: 95%;
+                padding: 6px 12px 6px 30px;
+                background-repeat: no-repeat;
+                background-position: 10px 50%;
+                min-height: 14px;
+                font-weight: bold;
+                text-decoration: underline;
+            }
+            
+            /* IE needs hasLayout for link block hovers */
+            .eng-msie #sidebar-nav .tab a { width: 100%; }
+
+            #sidebar-nav .tab a:hover {
+                background-color: #f2f5fa;
+            }
+
+            #sidebar-nav .tab.selected {
+                padding: 0;
+                border: 1px solid #95a9df;
+                border-bottom-color: #5f85bf;
+                border-width: 1px 0;
+                background: #bbceea url(../images/bg-selected.png) repeat-x 50% 50%;
+            }
+            #sidebar-nav .tab.selected a {
+                padding-top: 5px;
+                border-top: 1px solid #cfe5fb;
+                color: #1d3f70;
+                text-decoration: none;
+            }
+            #sidebar-nav .tab.selected a strong {
+                background-image: none;
+            }
+
+            #sidebar-nav .tab.selected a:hover {
+                background-color: transparent;
+                text-decoration: none;
+            }
+
+        #sidebox-calendar,
+        #sidebox-sidebook { margin: 12px; margin-bottom: 0; }
+        #sidebox-sidebook { padding-bottom: 12px; }
+
+        #sidebox-calendar { }
+            
+            #sidebox-calendar .month-widget {
+                background-color: #f6f6f6;
+                border: 1px solid #888;
+                width: 100%;
+            }
+
+            #sidebox-calendar .month-widget th {
+            }
+            #sidebox-calendar .month-widget td { 
+                font-size: 86%;
+                width: 14%;
+                text-align: center;
+            }
+
+            #sidebox-calendar .month-widget a { 
+                display: block;
+                padding: 1px;
+            }
+            #sidebox-calendar .month-widget a:link, 
+            #sidebox-calendar .month-widget a:visited { 
+                /*
+                color: #777;
+                */
+            }
+            #sidebox-calendar .month-widget a:active { 
+                outline: none;
+            }
+
+            #sidebox-calendar .month-widget a.today { 
+                background-image: url(../images/cal-today.png);
+                background-color: #fff;
+                border: 1px solid #ffba57;
+                color: #ee8d03;
+                padding: 0;
+            }
+
+            #sidebox-calendar .month-widget a.visible { 
+                background-color: #d1e9cf;
+                color: #4e9a48;
+            }
+
+            #sidebox-calendar .month-widget a:hover { 
+                background-color: #c7d4e7;
+                color: #41679f;
+                border: 1px solid #b7c8e1;
+                padding: 0;
+                text-decoration: none;
+            }
+
+            #sidebox-calendar .prev, 
+            #sidebox-calendar .header, 
+            #sidebox-calendar .next {
+                background: #e6e6e6 url(../images/bg-side-title.png) repeat-x 50% 50%;
+                    border-bottom: 1px solid #ccc;
+            }
+
+                #sidebox-calendar .header {
+                    color: #555;
+                    font-size: 0.85em;
+                    font-weight: normal;
+                    white-space: nowrap;
+                }
+
+                #sidebox-calendar .prev { border-left-width: 1px; }
+
+                #sidebox-calendar td.prev, #sidebox-calendar td.next {
+                    padding: 0;
+                    vertical-align: top;
+                }
+                #sidebox-calendar td.next {
+                    text-align: right;
+                }
+                #sidebox-calendar td.next a {
+                    float: right;
+                }
+                #sidebox-calendar td.prev a, #sidebox-calendar td.next a {
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    color: transparent;
+                    font-size: 0;
+                    margin: 1px;
+                    height: 20px;
+                    width: 100%;
+                    overflow: hidden;
+                    text-indent: -2000px;
+                    display: block;
+                }
+                #sidebox-calendar td.prev a {
+                    background-image: url(../images/go-previous.png) 
+                }
+                #sidebox-calendar td.next a {
+                    background-image: url(../images/go-next.png);
+                }
+
+            #sidebox-calendar .todaylink p {
+                margin: 0;
+                padding: 0;
+            }
+            #sidebox-calendar .todaylink a {
+                margin: 0 2px 2px;
+            }
+
+            #sidebox-calendar .daylabels td {
+                padding: 4px 0 2px;
+                background-color: #fff;
+                border-bottom: 1px solid #ddd;
+                color: #777;
+            }
+            
+            /* Add a 1px space under the day labels */
+            #sidebox-calendar .daylabels + tr td {
+                padding-top: 1px;
+            }
+
+            #sidebox-calendar a { }
+
+        #adbk {
+            margin-top: 3em;
+            background-color: #fefefe;
+            padding: 2px;
+            border: 1px solid #ddd;
+            border-width: 1px 2px 2px 1px;
+            overflow: hidden;
+            font-size: 90%;
+        }
+
+            #adbk-card {
+                overflow: auto;
+            }
+
+            #adbk-header td { 
+                vertical-align: top;
+            }
+
+            #adbk-search{
+                width: 95%;
+            }
+
+            #adbk-img {
+            }
+
+            #adbk-card spacer { 
+                min-height: 1em;
+                height: 1em;
+            }
+
+            #adbk-card td { 
+                white-space: nowrap;
+            }
+
+            #adbk-card th {
+                text-align: right;
+                overflow: hidden;
+                white-space: nowrap;
+                text-transform: lowercase;
+            }
+
+            #adbk-card th:after { 
+                content: ":"
+            }
+
+    /* For some strange reason, IE6 wants to compute width differently 
+    * ...unless a negative right margin is set */
+    .eng-msie.engv-6 .list-selector .search-field,
+    .eng-msie.engv-6 .list-selector .unselected-items { margin-right: -5%; }
+
+    #section-content {
+        border: 1px solid #5f85bf;
+        border-width: 1px 0 0 1px;
+    }
+
+
+#sourcebar,
+#toolbar { 
+    background: #fcfcfc url(../images/bg-toolbar.png) repeat-x 0 100%;
+    border-bottom: 1px solid #bbb;
+    color: #999;
+    padding: 6px 12px;
+    font-size: 90%;
+    clear: both;
+}
+#sourcebar { 
+    padding: 3px 12px;
+}
+
+#sourcebar + #toolbar {
+}
+
+#toolbar .conv-nav {
+    border-collapse: collapse;
+    padding: 0;
+    margin: 0;
+}
+#toolbar .conv-nav td {
+    padding: 0;
+}
+
+#toolbar input { 
+    /*
+    margin: 0.5em 0.25em;
+    */
+}
+
+#toolbar .spacer { 
+    margin: 0 0.25em;
+}
+
+#toolbar .bar { 
+    color: #ccc;
+    display: none;
+}
+
+#toolbar td { font-size: 88%; }
+
+/* Add a little spacing around some buttons in the mail toolbar */
+#toolbar #mail-toolbar-archive,
+#toolbar #mail-toolbar-star { 
+    margin-left: 2.5ex; 
+    margin-right: 2.5ex; 
+}
+
+#sourcebar { 
+    overflow: auto;
+}
+
+#sourcebar li {
+    display: inline; 
+    margin: 0 0.5ex;
+}
+
+#sourcebar li a,
+#toolbar a { 
+    padding: 5px 6px;
+}
+
+#sourcebar li.selected a,
+#toolbar a.selected { 
+    background-color: #999;
+    border: 1px solid #444;
+    padding: 0 5px;
+    color: #fff;
+}
+
+#toolbar .next a,
+#toolbar .prev a {
+    padding: 0;
+}
+
+#sourcebar a { 
+    float: left;
+    display: block;
+    padding: 6px 8px;
+}
+#sourcebar li.selected a { 
+    padding: 4px 6px;
+}
+
+.eng-msie.engv-6 #sourcebar { padding: 0.7em; }
+.eng-msie.engv-6 #sourcebar a { display: inline; float: none; }
+
+#sourcebar li a:hover,
+#toolbar a:hover { 
+    cursor: pointer;
+    cursor: hand; 
+    text-decoration: none;
+}
+
+#quickevent {
+    width: 15em;
+}
+
+.sidebox {
+  width: 12.5em;
+}
+
+
+#section-upcoming h3,
+#section-summary h3 {
+  margin-top: 1em;
+}
+
+#section-summary li.selected {
+  background-color: #517faf;
+
+}
+#section-summary li.selected a {
+  color: #fff;
+}
+
+#section-content {
+}
+#section-content {
+  background-color: #fff;
+  margin-bottom: 0;
+}
+
+#searchbar {
+    background-color: #feefda;
+    color: #fa9504;
+    font-weight: bold;
+    font-size: larger;
+    position: relative;
+    border-bottom: 1px solid #fa9504;
+    padding: 0.25em 0.5em;
+}
+
+.conversation-list .time { 
+  /*text-align: right;*/
+  text-align: right;
+}
+.conversation-list .date { 
+  /*width: 10em;*/
+}
+.conversation-list .subject { 
+  overflow: hidden;
+}
+
+#item-list-nav { 
+  text-align: right;
+  display: none;
+}
+
+.pager { 
+  text-align: center;
+  margin: 2em;
+}
+
+#searchbar .button-close {
+    display: block;
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+}
+#section-list {
+  background-color: #fff;
+}
+#section-itemview {
+    /*
+  border: 1px solid #7ed12d;
+  */
+  border-left: 0;
+  border-right: 0;
+  background: #fff;
+  overflow: hidden;
+  height: 99%;
+  padding: 0;
+  margin: 0;
+}
+
+#section-upcoming {
+  display: none;
+}
+
+#searchbar {
+}
+
+.tab-space { 
+  width: 100%;
+  border-bottom: 1px solid #fffdfa;
+}
+
+#ifolder-tab { 
+  display: none
+}
+
+#summary-tab { margin-top: 0.5em !important; }
+
+/* Tab icons */
+#summary-tab-href { background-image: url(../images/home-16.png); }
+#mail-tab-href { background-image: url(../images/message-16.png); }
+#calendar-tab-href { background-image: url(../images/calendar-16.png); }
+#addressbook-tab-href { background-image: url(../images/contact-16.png); }
+
+/* Again, for IE6 */
+.eng-msie.engv-6 #summary-tab-href { background-image: url(../images/home-16.gif); }
+.eng-msie.engv-6 #mail-tab-href { background-image: url(../images/message-16.gif); }
+.eng-msie.engv-6 #calendar-tab-href { background-image: url(../images/calendar-16.gif); }
+.eng-msie.engv-6 #addressbook-tab-href { background-image: url(../images/contact-16.gif); }
+
+#search-tab {
+  width: 100%;
+  margin-right: -1px;
+  text-align: left;
+}
+
+#search-tab label { color: #555; }
+
+#search-tab a {
+  padding: 0;
+  display: inline;
+}
+
+.sidebox { 
+  font-size: 90%;
+  border: 1px solid;
+  margin: 0 0.5em 1.5em 0.5em;
+  background-color: #fff;
+  color: #000;
+}
+.sidebox a {
+}
+
+.sidebox .title { 
+    color: #fff;
+    font-size: x-small;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    padding: 1px 2px;
+    font-weight: normal;
+}
+
+.sidebox .body { 
+  padding: 0.5em 0.5em;
+}
+
+.sidebox li { 
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
+
+.sidebox li.selected {
+  background-color: #7ed12d;
+  background: #7bc828 url(../images/navselhilight.png) repeat-x top;
+}
+
+.sidebox li.selected a {
+  color: #fff;
+}
+
+.sidebox li input { 
+  margin: 0 0.5em;
+}
+
+.sidebox li a {
+}
+
+#sidebox-bookmarks .title { 
+  border-color: #fa9504;
+  background-color: #fa9504;
+}
+
+#sidebox-bookmarks .body { 
+  border-color: #fa9504;
+}
+
+#bookmark-commands { 
+  margin-top: 6px;
+}
+
+#remove-bookmarks { 
+  display: block;
+  visibility: hidden;
+}
+
+#add-bookmark {
+  display: block;
+  float: right;
+}
+
+#sidebox-sourcelist .add-source {
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+#sidebox-actions .title { 
+  border-color: #ae7cad;
+  background-color: #82bf51;
+}
+
+#sidebox-actions .body { 
+  border-color: #ae7cad;
+  padding-left: 1em;
+}
+
+#sidebox-sourcelist .title { 
+  border-color: #93d94c;
+  /*
+  */
+  background-color: #93d94c;
+  background-color: #9f7cc8;
+  background-color: #937dad;
+}
+
+#sidebox-sourcelist .body { 
+  border-color: #94d94c;
+  padding: 0;
+}
+
+#sidebox-sourcelist li a {
+    display: block;
+    padding: 0.25em 0.5em;
+    color: #76539f;
+}
+#sidebox-sourcelist li.selected a,
+#sidebox-sourcelist li a.selected {
+    /*
+  background-color: #7ed12d;
+  background: #7bc828 url(../images/navselhilight.png) repeat-x top;
+  */
+  background-color: #dfd3ed;
+}
+#sidebox-sourcelist li a:hover {
+    text-decoration: none;
+    background-color: #f8f2f8;
+}
+#sidebox-sourcelist li.selected a:hover,
+#sidebox-sourcelist li a.selected:hover {
+    background-color: #d9c8e6;
+}
+#sidebox-sourcelist li a img {
+    vertical-align: bottom;
+    margin-right: 3px;
+}
+
+#sidebox-sourcelist #calendar-list { padding: 0.375em 0; }
+
+#sidebox-upcoming .title {
+  border-color: #8f5902;
+  /*
+  background-color: #e9b96e;
+  */
+  background-color: #8f5902;
+}
+
+#sidebox-upcoming .body {
+  border-color: #8f5902;
+}
+
+/* Misc. Development stuff */
+#_MockiKit_LoggingPane {
+    z-index: 101;
+}
+#interpreter_form {
+    background-color: Window;
+    color: WindowText;
+    border-bottom: 1px solid ThreeDShadow;
+    position: relative;
+    z-index: 102;
+    font-size: 12pt;
+}
+#interpreter_area {
+    background-color: #fff;
+    color: #000;
+}
+
+.left { float: left; }
+.right { float: right; }
+
+/*** Forms style ***/
+input {
+  font-family: inherit;
+  font-size: inherit;
+  /* we probably shouldn't inherit the color without inheriting
+     background? */
+  /* color: inherit; */
+}
+
+input,
+textarea {
+  padding: 1px;
+}
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input:not([type]),
+button,
+textarea {
+  border: 1px solid #bbbed0;
+  padding: 2px;
+  background: #fff url(../images/grad-textarea.png) repeat-x top;
+}
+input[type="text"]:focus,
+input[type="search"]:focus,
+input[type="password"]:focus,
+input:not([type]):focus,
+button:focus,
+textarea:focus {
+    /*
+    border: 2px solid Highlight;
+    padding: 1px;
+    */
+}
+input[type="text"]:hover,
+input[type="search"]:hover,
+input[type="password"]:hover,
+input:not([type]):hover,
+button:hover,
+textarea:hover {
+    background-color: #fffdf9;
+}
+
+input.empty { color: #999; }
+
+.text-entry {
+    border: 1px solid #bbb;
+}
+
+/* Due to IE6's braindeadness, we cannot combine this with CSS that includes [type=""], as below */
+.toggle-button {
+    -moz-border-radius: 2px;
+    background-image: url(../images/bg-button.png);
+    background-position: bottom;
+    background-repeat: repeat-x;
+    font-weight: normal;
+    padding: 1px 3pt !important;
+    border-width: 0;
+}
+.widgetcolor,
+.toggle-button {
+    background-color: #fbf6e3;
+    color: #3c2b14;
+    -moz-border-top-colors: #ce9d59 #fdf8f2 transparent;
+    -moz-border-right-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-bottom-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-left-colors: #ce9d59 #fdf8f2 transparent;
+    padding: 2pt;
+}
+
+/* The comment above applies here, plus IE6 applies .toggle-button.selected 
+   to all .selected unless it's specifically specified, as below */
+.toggle-button-group .toggle-button.selected {
+    background-image: url(../images/bg-button-selected.png);
+    background-color: #ffd69b;
+}
+
+/* Hacks to make buttons look better in Mozilla-based browsers */
+body.os-x11.eng-gecko input[type="submit"],
+body.os-x11.eng-gecko input[type="reset"],
+body.os-x11.eng-gecko input[type="button"],
+body.os-x11.eng-gecko button {
+    -moz-border-radius: 2px;
+    background-image: url(../images/bg-button.png);
+    background-position: bottom;
+    background-repeat: repeat-x;
+    font-weight: normal;
+    padding: 1px 3pt !important;
+    border-width: 2px;
+}
+
+body.os-x11.eng-gecko input[type="submit"],
+body.os-x11.eng-gecko input[type="reset"],
+body.os-x11.eng-gecko input[type="button"],
+body.os-x11.eng-gecko button {
+    background-color: #fbf6e3;
+    color: #3c2b14;
+    -moz-border-top-colors: #ce9d59 #fdf8f2 transparent;
+    -moz-border-right-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-bottom-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-left-colors: #ce9d59 #fdf8f2 transparent;
+}
+body.os-x11.eng-gecko input[type="submit"]:hover,
+body.os-x11.eng-gecko input[type="reset"]:hover,
+body.os-x11.eng-gecko input[type="button"]:hover,
+body.os-x11.eng-gecko button:hover {
+    background-color: #fff;
+}
+body.os-x11.eng-gecko input[type="submit"]:focus,
+body.os-x11.eng-gecko input[type="reset"]:focus,
+body.os-x11.eng-gecko input[type="button"]:focus,
+body.os-x11.eng-gecko button:focus {
+    -moz-border-top-colors: Highlight Highlight transparent;
+    -moz-border-right-colors: Highlight Highlight transparent;
+    -moz-border-bottom-colors: Highlight Highlight transparent;
+    -moz-border-left-colors: Highlight Highlight transparent;
+}
+body.os-x11.eng-gecko input[type="submit"]:active,
+body.os-x11.eng-gecko input[type="reset"]:active,
+body.os-x11.eng-gecko input[type="button"]:active,
+body.os-x11.eng-gecko button:active {
+    background-image: url(../images/bg-button-pressed.png);
+    background-position: top;
+    -moz-border-top-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-right-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-bottom-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-left-colors: #ce9d59 #fcf7f0 transparent;
+}
+body.os-x11.eng-gecko input[type="submit"][disabled],
+body.os-x11.eng-gecko input[type="reset"][disabled],
+body.os-x11.eng-gecko input[type="button"][disabled],
+body.os-x11.eng-gecko button[disabled] {
+    -moz-border-top-colors: #ce9d59 #fdf8f2 transparent;
+    -moz-border-right-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-bottom-colors: #ce9d59 #fcf7f0 transparent;
+    -moz-border-left-colors: #ce9d59 #fdf8f2 transparent;
+}
+
+body.os-x11.eng-gecko input[disabled],
+body.os-x11.eng-gecko input[disabled]:hover,
+body.os-x11.eng-gecko input[disabled]:active,
+body.os-x11.eng-gecko select[disabled],
+body.os-x11.eng-gecko select[disabled]:hover,
+body.os-x11.eng-gecko select[disabled]:active,
+body.os-x11.eng-gecko textarea[disabled],
+body.os-x11.eng-gecko textarea[disabled]:hover,
+body.os-x11.eng-gecko textarea[disabled]:active {
+    background-image: none;
+    background-color: #f4f4f4;
+    border-color: #bbb;
+    color: #999;
+    opacity: 0.75;
+}
+body.os-x11.eng-gecko input[type="button"][disabled],
+body.os-x11.eng-gecko input[type="button"][disabled]:hover,
+body.os-x11.eng-gecko input[type="button"][disabled]:active,
+body.os-x11.eng-gecko input[type="reset"][disabled],
+body.os-x11.eng-gecko input[type="reset"][disabled]:hover,
+body.os-x11.eng-gecko input[type="reset"][disabled]:active,
+body.os-x11.eng-gecko input[type="submit"][disabled],
+body.os-x11.eng-gecko input[type="submit"][disabled]:hover,
+body.os-x11.eng-gecko input[type="submit"][disabled]:active,
+body.os-x11.eng-gecko button[disabled],
+body.os-x11.eng-gecko button[disabled]:hover,
+body.os-x11.eng-gecko button[disabled]:active {
+    background-image: none;
+    background-color: #fbf3e2;
+    color: #bbb;
+    opacity: 0.75;
+}
+
+body.eng-msie input, 
+body.eng-msie button, 
+body.eng-msie select { 
+    font-family: tahoma, arial, helvetica, sans-serif;
+    font-size: 9pt;
+}
+
+body.os-mac input, 
+body.os-mac button, 
+body.os-mac select { 
+    font-family: lucida grande, helvetica, sans-serif;
+    font-size: 0.95em;
+}
+body.os-mac.eng-webkit input,
+body.os-mac.eng-webkit button,
+body.os-mac.eng-webkit select {
+    font-size: 1em;
+}
+
+input, button, select, textarea { }
+
+body.os-x11.eng-gecko input[type="checkbox"],
+body.os-x11.eng-gecko select {
+    -moz-border-top-colors: Transparent #c9bdab;
+    -moz-border-right-colors: White #c9bdab;
+    -moz-border-bottom-colors: White #c9bdab;
+    -moz-border-left-colors: Transparent #c9bdab;
+}
+    body.os-x11.eng-gecko input[type="checkbox"]:focus/*,
+    body.os-x11.eng-gecko select:focus*/ {
+        -moz-border-top-colors: Highlight Highlight transparent;
+        -moz-border-right-colors: Highlight Highlight transparent;
+        -moz-border-bottom-colors: Highlight Highlight transparent;
+        -moz-border-left-colors: Highlight Highlight transparent;
+    }
+    /* Okay, this :hover is a Moz/FF work-around to make single-clicking selects work. */
+    /*select:hover {
+        -moz-border-top-colors: Transparent #c9bdab;
+        -moz-border-right-colors: White #c9bdab;
+        -moz-border-bottom-colors: White #c9bdab;
+        -moz-border-left-colors: Transparent #c9bdab;
+    }*/
+
+    body.os-x11.eng-gecko input[type="checkbox"] {
+        background-image: url(../images/grad-textarea.png);
+        background-position: top;
+        background-repeat: repeat-x;
+        background: #fff url(../images/grad-textarea.png) repeat-x top;
+    }
+
+#content-iframe {
+    width: 100%;
+}
+
+/* Extra developer-centric links below the sidebox */
+#extra {
+    color: #999;
+    font-size: 75%;
+    text-align: center;
+    line-height: 1.5;
+    margin: 3ex 0 0;
+}
+#extra a {
+    color: #999;
+}
+
+.indented { 
+  margin-left: 16px;
+}
+
+.scrolledheader {  
+  margin-right: 16px;
+}
+
+#sidebox-sidebook { }
+
+    #sidebox-sidebook .notebook-tabs {
+        background-color: #ccc;
+        position: static;
+        border: 1px solid #999;
+        height: 24px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #sidebox-sidebook .notebook-tabs a {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        border: 0;
+        float: left;
+        width: 50%;
+        background: #e6e6e6 url(../images/bg-side-title.png) repeat-x 50% 50%;
+        border-top: 1px solid #eee;
+    }
+    #sidebox-sidebook .notebook-tabs a:hover {
+        background: #f6f6f6 url(../images/bg-side-title-hover.png) repeat-x 50% 50%;
+    }
+
+    #sidebox-sidebook .notebook-tabs a.selected { 
+        margin: 0;
+        padding: 0;
+        background: #bbceea url(../images/bg-selected.png) repeat-x 50% 50%;
+        border-color: #cfe5fb;
+    }
+    #sidebox-sidebook .notebook-tabs a img { 
+        display: block;
+        border: 1px solid #999;
+        border-width: 0 1px;
+        width: 100%;
+        height: 23px;
+    }
+    #sidebox-sidebook .notebook-tabs a img.addressbook { border: 1px solid #999; border-width: 0 1px 0 0; }
+    #sidebox-sidebook .notebook-tabs a img.todo { border: none; }
+
+    .eng-msie.engv-6 #sidebox-sidebook .notebook-tabs a img { border: none; }
+    .eng-msie.engv-6 #sidebox-sidebook .notebook-tabs a img.calendars { border-width: 0; }
+
+    #sidebox-sidebook .notebook-content {
+        margin: 0;
+        background-color: #f6f6f6;
+        border: 1px solid #999;
+    }
+
+.group-footer,
+.search-group { 
+    clear: both;
+}
+
+pre {
+    white-space: pre-wrap;       /* CSS3 */
+    white-space: -moz-pre-wrap;  /* Moz */
+    white-space: -o-pre-wrap;    /* Opera */
+    word-wrap: break-word;       /* IE */
+}
+
+#loading { 
+    font-family: sans-serif;
+    font-size: 18pt;
+    text-decoration: blink !important;
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#tzlabel { color: #fff; }
+
+#search-no-results
+{
+  padding-top: 25%;
+}
+
+#nomail-summary
+{
+  padding-top: 50%;
+  text-align: center;
+}
+
+#preferences-container
+{
+    padding-right: 2em;
+    padding-left: 2em;
+}

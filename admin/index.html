@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
+	<link type="image/ico" href="images/bongo-favicon.ico" rel="icon">
+	<link type="image/png" href="images/bongo-favicon.png" rel="icon">
 	<title>Admin prototype</title>
 	
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
+	<link rel="stylesheet" type="text/css" href="css/layout.css" />
 	
 	<script src="js/lib/jquery-1.6.2.js"></script>
 	<script src="js/lib/jquery.tmpl.js"></script>
@@ -26,13 +29,36 @@
 </head>
 
 <body id="home">
-
-<form id="login-form" class="loginbox">
-	<p id="login-form-message"></p>
-	<p>Username: <input type="text" name="name" /></p>
-	<p>Password: <input type="password" name="password" /></p>
-	<button id="login-form-button">Log In</button>
-</form>
+<div id="login-pane" style="display: block;">
+	<div id="login-bg-top"></div>
+	<div id="login-bg-bottom"></div>
+	<h1 id="login-logo">Bongo</h1>
+	<h4 id="login-form-message">&nbsp;</h4>
+	<form id="login-form" class="loginbox">
+		<table cellspacing="6" cellpadding="0" summary="">
+			<tbody>
+				<tr>
+					<th>
+						<label id="login-user-label">Name:</label>
+						</th>
+						<td colspan="2">
+						<input id="login-user" class="text-entry" type="text" style="width: 98%;" name="name" >
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label id="login-password-label">Password:</label>
+						</th>
+						<td colspan="2">
+						<input id="login-password" class="text-entry" type="password" style="width: 98%;" name="password">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+					<input id="login-form-button" type="button" style="float: right; display: block;" value="Login">
+				</td>
+		</tr>
+</div>
 
 <div id="admin-tool" style="display: none">
 	<h1>Bongo Administration</h1>
