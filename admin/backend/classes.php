@@ -85,6 +85,15 @@ class DataModule implements DataModuleInterface {
 				$name = $namebits[2];
 				$result[$name] = json_decode($file->value, true);
 			}
+			
+			// look for domain information
+			$domains = $result['queue']['domains'];
+			array_unshift($domains, 'default_config');
+			$result['aliases'] = array();
+			foreach ($domains as $domain) {
+				$domain_config = $this->store->Read('/config/aliases/' . $domain);
+				$result['aliases'][$domain] = json_decode($domain_config->value, true);
+			}
 		} catch (Exception $e) {
 			return null;
 		}
