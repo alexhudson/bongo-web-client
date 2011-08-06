@@ -44,6 +44,7 @@
 
 	<div id="admin-tabs">
 		<ul>
+			<li><a href="#tabs-accounts">Accounts</a></li>
 			<li><a href="#tabs-domains">Domains</a></li>
 			<li><a href="#tabs-agents">Global settings</a></li>
 			<li><a href="#tabs-anti">Antispam &amp; virus</a></li>
@@ -51,6 +52,16 @@
 			<li><a href="#tabs-smtp">SMTP</a></li>
 			<li><a href="#tabs-queue">Internal queue</a></li>
 		</ul>
+		<div id="tabs-accounts">
+			<table>
+				<thead>
+					<tr>
+						<th>Login name</th>
+					</tr>
+				</thead>
+				<tbody data-bind="template: { name: 'tmp_account_list', foreach: accounts }"></tbody>
+			</table>
+		</div>
 		<div id="tabs-domains">
 			<div data-bind="visible: ! _showSelectedDomain()">
 				<h2>Domains available</h2>
@@ -253,6 +264,12 @@
 		<td><input type="text" data-bind="value: from" /></td>
 		<td><input type="text" data-bind="value: to" /></td>
 		<td><button data-bind="click: function () { $item.aliases[$item.domain]['aliases'].remove($data); }">Remove</button></td>
+	</tr>
+</script>
+
+<script type="text/html" id="tmp_account_list">
+	<tr>
+		<td data-bind="text: name">Account name</td>
 	</tr>
 </script>
 

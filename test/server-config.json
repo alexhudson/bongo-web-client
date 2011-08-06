@@ -129,5 +129,10 @@
 			],
 			"username-mapping" : 2
 		}
-	}
+	},
+	
+	"accounts" : [
+		{ name: "admin" },
+		{ name: "testing" }
+	]
 }

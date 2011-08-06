@@ -104,6 +104,18 @@ class DataModule implements DataModuleInterface {
 				
 				$result['aliases'][$domain]['aliases'] = $newlist;
 			}
+			
+			// look for user accounts
+			$result['accounts'] = array();
+			$userCallback = new Bongo_StoreCallback(null, function($resp, &$data) {
+				array_push($data, $resp->name);
+			}, array());
+			$userCallback->data = array();
+			$this->store->Store();
+			$this->store->AccountList($userCallback);
+			foreach ($userCallback->data as $account) {
+				array_push($result['accounts'], array( 'name' => $account));
+			}
 		} catch (Exception $e) {
 			return null;
 		}
@@ -121,7 +133,7 @@ class DataModule implements DataModuleInterface {
 		$this->store->Store('_system');
 		
 		// remove data hacks
-		$dataset['queue']['domains'] = array_filter($dataset['queue']['domains'], function ($var) { return ($var != 'default_config'); });
+		// FIXME $dataset['queue']['domains'] = array_filter($dataset['queue']['domains'], function ($var) { return ($var != 'default_config'); });
 		
 		// save current data
 		foreach ($dataset as $config => $configitems) {
