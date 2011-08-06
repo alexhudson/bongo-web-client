@@ -36,6 +36,11 @@
 <div id="admin-tool" style="display: none">
 	<h1>Bongo Administration</h1>
 
+	<div>
+		<button id="admin-logout" style="float: right;">Log Out</button>
+		<button id="admin-save">Save changes</button>
+	</div>
+
 	<div id="admin-tabs">
 		<ul>
 			<li><a href="#tabs-agents">Global settings</a></li>
@@ -181,8 +186,6 @@
 			</table>
 		</div>
 	</div>
-	
-	<button id="admin-save">Save changes</button>
 </div>
 
 <script type="text/html" id="tmp_agent_list">
@@ -192,6 +195,8 @@
 		<td><input type="checkbox" data-bind="checked: enabled" /></td>
 	</tr>
 </script>
+
+
 
 </body>
 </html>
