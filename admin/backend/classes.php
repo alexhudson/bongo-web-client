@@ -120,6 +120,10 @@ class DataModule implements DataModuleInterface {
 	public function saveData($dataset) {
 		$this->store->Store('_system');
 		
+		// remove data hacks
+		$dataset['queue']['domains'] = array_filter($dataset['queue']['domains'], function ($var) { return ($var != 'default_config'); });
+		
+		// save current data
 		foreach ($dataset as $config => $configitems) {
 			if ($config == 'aliases') continue;
 			if (substr($config, 0, 1) == '_') continue;
@@ -142,9 +146,14 @@ class DataModule implements DataModuleInterface {
 			
 			$content = json_encode($configitems);
 			
-			// FIXME: check alias file isn't new before we attempt to replace it
-			if ($content != '')
-				$this->store->Replace($filename, $content);
+			if ($content != '') {
+				$status = $this->store->Info($filename);
+				if ($status->response_code == 2001) {
+					$this->store->Replace($filename, $content);
+				} else {
+					$this->store->Write('/config/aliases', Bongo::DOC_CONFIG, $content, array('filename' => $domain));
+				}
+			}
 		}
 	}
 }
