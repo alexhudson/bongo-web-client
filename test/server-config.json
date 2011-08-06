@@ -111,28 +111,28 @@
 		"default_config" : {
 			"domainalias" : "",
 			"aliases" : [ 
-				{ "from: "postmaster", "to" : "admin" }
+				{ "from": "postmaster", "to" : "admin" }
 			],
 			"username-mapping" : 0
 		},
 		"example.com" : {
 			"domainalias" : "",
 			"aliases" : [ 
-				{ "from: "postmaster", "to" : "admin" }
+				{ "from": "postmaster", "to" : "admin" }
 			],
 			"username-mapping" : 1
 		},
 		"another.example.com" : {
 			"domainalias" : "",
 			"aliases" : [ 
-				{ "from: "postmaster", "to" : "admin" }
+				{ "from": "postmaster", "to" : "admin" }
 			],
 			"username-mapping" : 2
 		}
 	},
 	
 	"accounts" : [
-		{ name: "admin" },
-		{ name: "testing" }
+		{ "name": "admin" },
+		{ "name": "testing" }
 	]
 }
