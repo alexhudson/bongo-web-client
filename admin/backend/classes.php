@@ -141,6 +141,8 @@ class DataModule implements DataModuleInterface {
 			}
 			
 			$content = json_encode($configitems);
+			
+			// FIXME: check alias file isn't new before we attempt to replace it
 			if ($content != '')
 				$this->store->Replace($filename, $content);
 		}

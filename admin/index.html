@@ -55,13 +55,26 @@
 			<div data-bind="visible: ! _showSelectedDomain()">
 				<h2>Domains available</h2>
 				
-				<ul data-bind="template: { name: 'tmp_domain_list', foreach: queue.domains, templateOptions: { selected: _selectedDomain, showSelected: _showSelectedDomain } }">
-				</ul>
+				<table>
+					<thead>
+						<tr>
+							<th>Domain name</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody data-bind="template: { name: 'tmp_domain_list', foreach: queue.domains, templateOptions: { selected: _selectedDomain, showSelected: _showSelectedDomain } }">
+					</tbody>
+				</table>
+				<button data-bind="click: function() { var t = _showAddDomain(); _showAddDomain(!t); }">+</button>
+				
+				<div data-bind="visible: _showAddDomain()">
+					<p>New domain name: <input type="text" id="add-domain-name" /> <button data-bind="click: function() { admin.addDomain(); }">Add new domain</button></p>
+				</div>
 			</div>
 			
 			<div data-bind="visible: _showSelectedDomain()">
 				<button data-bind="click: function () { _showSelectedDomain(false); } ">Close</button>
-				<h2 data-bind="text: _selectedDomain()">domain name</h2>
+				<h2>Domain: <span data-bind="text: _selectedDomain()">domain name</span></h2>
 				<p>Username mapping: <select data-bind="value: aliases[_selectedDomain()]['username-mapping']">
 					<option value="0">E-mail address local part is user account name</option>
 					<option value="1">Full e-mail address is user account name</option>
@@ -77,6 +90,9 @@
 					</tbody>
 				</table>
 				<button data-bind="click: function () { admin.addMapping(); }">Add new mapping</button>
+				
+				<br />
+				<button data-bind="click: function () { admin.removeCurrentDomain(); }">Remove domain</button>
 			</div>
 		</div>
 		<div id="tabs-agents">
@@ -221,8 +237,9 @@
 </script>
 
 <script type="text/html" id="tmp_domain_list">
-	<li>
-		<a data-bind="text: $data, click: function() { $item.selected($data); $item.showSelected(true); }">domain</a>
+	<tr>
+		<td data-bind="text: $data">domain</td>
+		<td><button data-bind="click: function() { $item.selected($data); $item.showSelected(true); }">Edit</button></td>
 	</li>
 </script>
 

@@ -56,6 +56,7 @@ Bongo.AdminTool = function(backend) {
 			
 			$this.model._selectedDomain = ko.observable('default_config');
 			$this.model._showSelectedDomain = ko.observable(false);
+			$this.model._showAddDomain = ko.observable(false);
 			
 			ko.applyBindings($this.model);
 			$('#login-form').hide();
@@ -83,6 +84,22 @@ Bongo.AdminTool = function(backend) {
 				from: ko.observable('from'),
 				to: ko.observable('to')
 			});
+		},
+		
+		addDomain: function () {
+			var name = $('#add-domain-name').val();
+			if (name != '') {
+				this.model.queue.domains.push(name);
+				var aliases = ko.observableArray();
+				aliases.push({ from: ko.observable('postmaster'), to: ko.observable('admin') });
+				this.model.aliases[name] = {
+					'domainalias': ko.observable(''),
+					'aliases': aliases,
+					'username-mapping': ko.observable(0)
+				};
+				$('#add-domain-name').val('');
+				this.model._showAddDomain(false);
+			}
 		}
 	};
 	$this.backend = backend;
