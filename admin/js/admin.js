@@ -7,18 +7,16 @@ Bongo.AdminTool = function(backend) {
 			$('#login-form-button').click(function() {
 				var data = $('#login-form').serializeArray();
 				data.push({name: 'command', value: 'login'});
-				$.post($this.backend, data, function (d, t, response) {
-					var result = $.parseJSON(response.responseText);
-					if (result['status'] ==  'ok') {
-						$this.loadData(result);
-					} else {
-						$('#login-form-message').text(result['message']);
-					}
-				}, 'json').error(function(data) {
+				$this.loadData(data, function(data) {
 					var result = $.parseJSON(data.responseText);
 					$('#login-form-message').text(result['message']);
 				});
 				return false;
+			});
+			$('#admin-logout').click(function() {
+				$.cookie('bongo_admin_cookie', null);
+				$('#login-form').show();
+				$('#admin-tool').hide();
 			});
 			$('#admin-tabs').tabs();
 			
@@ -26,20 +24,25 @@ Bongo.AdminTool = function(backend) {
 			if (existing_cookie) {
 				$('#login-form').hide();
 				// TODO: show some kind of holding thing?
-				$.post($this.backend, { command: 'login', cookie: existing_cookie }, function (d, t, response) {
-					var result = $.parseJSON(response.responseText);
-					if (result['status'] ==  'ok') {
-						$this.loadData(result);
-					} else {
+				$this.loadData({ command: 'login', cookie: existing_cookie },
+					function() {
 						$('#login-form').show();
-					}
-				}, 'json').error(function() {
-					$('#login-form').show();
-				});
+					});
 			}
 		},
 		
-		loadData: function (result) {
+		loadData: function(data, err) {
+			$.post($this.backend, data, function (d, t, response) {
+				var result = $.parseJSON(response.responseText);
+				if (result['status'] ==  'ok') {
+					$this.loadDataCallback(result);
+				} else {
+					$('#login-form-message').text(result['message']);
+				}
+			}, 'json').error(err);
+		},
+		
+		loadDataCallback: function (result) {
 			// load the data package from Bongo
 			if (result['cookie'])
 				$.cookie('bongo_admin_cookie', result['cookie'], { expires: 1, path: '/' });
