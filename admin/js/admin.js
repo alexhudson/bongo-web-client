@@ -100,6 +100,14 @@ Bongo.AdminTool = function(backend) {
 				$('#add-domain-name').val('');
 				this.model._showAddDomain(false);
 			}
+		},
+		
+		removeCurrentDomain: function() {
+			if (confirm("Are you sure? This will erase it!")) {
+				var name = this.model._selectedDomain();
+				this.model.queue.domains.remove(name);
+				this.model._showSelectedDomain(false);
+			}
 		}
 	};
 	$this.backend = backend;
