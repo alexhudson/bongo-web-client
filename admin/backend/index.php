@@ -43,6 +43,23 @@ switch ($command) {
 		}
 		// TODO : Need to detect "cannot connect" error condition
 		break;
+	case 'savedata':
+		if ($server->isAuthed()) {
+			try {
+				$dataset = json_decode($_POST['data'], true);
+				$message = $server->saveData($dataset);
+			} catch (Exception $e) {
+				$message = "Couldn't decode data";
+			}
+			if (isset($message)) {
+				$result['message'] = $message;
+			} else {
+				$result['status'] = 'ok';
+			}
+		} else {
+			$result['message'] = 'Cookie timed out';
+		}
+		break;
 	default:
 		$result['message'] = 'Unknown command used: ' . $command;
 		break;

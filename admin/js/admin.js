@@ -18,6 +18,10 @@ Bongo.AdminTool = function(backend) {
 				$('#login-form').show();
 				$('#admin-tool').hide();
 			});
+			$('#admin-save').click(function () {
+				$this.saveData();
+				return false;
+			});
 			$('#admin-tabs').tabs();
 			
 			var existing_cookie = $.cookie('bongo_admin_cookie');
@@ -46,10 +50,28 @@ Bongo.AdminTool = function(backend) {
 			// load the data package from Bongo
 			if (result['cookie'])
 				$.cookie('bongo_admin_cookie', result['cookie'], { expires: 1, path: '/' });
+			
+			$this.original_data = $.extend(true, {}, result['data']);
 			$this.model = ko.mapping.fromJS(result['data']);
 			ko.applyBindings($this.model);
 			$('#login-form').hide();
 			$('#admin-tool').show();
+		},
+		
+		saveData: function () {
+			var current_data = ko.toJSON($this.model);
+			
+			var package = { command: 'savedata', data: current_data, cookie: $.cookie('bongo_admin_cookie') };
+			$.post($this.backend, package, function (d, t, response) {
+				var result = $.parseJSON(response.responseText);
+				if (result['status'] ==  'ok') {
+					alert('Done!');
+				} else {
+					// TODO show error
+				}
+			}, 'json').error(function () {
+				alert('Something went wrong saving data');
+			});
 		}
 	};
 	$this.backend = backend;

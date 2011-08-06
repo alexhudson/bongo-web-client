@@ -8,6 +8,7 @@ interface DataModuleInterface {
 	public function getCookie();
 	public function grabStoreConfig();
 	public function grabExtraFlags();
+	public function saveData($dataset);
 }
 
 class DataModule implements DataModuleInterface {
@@ -103,6 +104,27 @@ class DataModule implements DataModuleInterface {
 	public function grabExtraFlags() {
 		return array();
 	}
+
+	public function saveData($dataset) {
+		$this->store->Store('_system');
+		
+		foreach ($dataset as $config => $configitems) {
+			if ($config == 'aliases') continue;
+			if (substr($config, 0, 1) == '_') continue;
+			
+			$filename = "/config/$config";
+			$content = json_encode($configitems);
+			if ($content != '')
+				$this->store->Replace($filename, $content);
+		}
+		
+		foreach ($dataset['aliases'] as $domain => $configitems) {
+			$filename = "/config/aliases/$domain";
+			$content = json_encode($configitems);
+			if ($content != '')
+				$this->store->Replace($filename, $content);
+		}
+	}
 }
 
 class DataModuleDummy implements DataModuleInterface {
@@ -134,5 +156,9 @@ class DataModuleDummy implements DataModuleInterface {
 	
 	public function grabExtraFlags() {
 		return array();
+	}
+	
+	public function saveData($dataset) {
+		return null;
 	}
 }
