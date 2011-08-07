@@ -78,15 +78,17 @@ body.login {
             right: 0;
         }
         #login-bg-top {
-            background: url(../images/login-bg-top.png) repeat-x 0 100%;
+            background: url(../images/grad-page.png) repeat-x 0 100%;
             height: 185px;
             top: -188px;
             border-bottom: 1px solid #385798;
         }
         #login-bg-bottom {
-            background: url(../images/login-bg-bottom.png) repeat-x 0 0;
+            background: url(../images/grad-page.png) repeat-x 0 0;
             height: 293px;
             bottom: -296px;
             border-top: 1px solid #1d3980;
+			-webkit-transform: rotate(-180deg);
+			-moz-transform: rotate(-180deg);
         }
         .eng-msie.engv-6 #login-bg-bottom { bottom: -298px; }
