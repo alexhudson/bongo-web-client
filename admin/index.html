@@ -5,10 +5,12 @@
 	<link type="image/ico" href="images/bongo-favicon.ico" rel="icon">
 	<link type="image/png" href="images/bongo-favicon.png" rel="icon">
 	<title>Admin prototype</title>
-	
+
+	<link href='http://fonts.googleapis.com/css?family=Cantarell:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="css/login.css" />
 	<link rel="stylesheet" type="text/css" href="css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
+
 	
 	<script src="js/lib/jquery-1.6.2.js"></script>
 	<script src="js/lib/jquery.tmpl.js"></script>
@@ -16,6 +18,7 @@
 	<script src="js/lib/jquery-ui-1.8.14.custom.js"></script>
 	<script src="js/lib/knockout-1.2.1.js"></script>
 	<script src="js/lib/knockout.mapping-latest.js"></script>
+	<script src="js/lib/modernizr.custom.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/themes/smoothness/jquery-ui-1.8.14.custom.css" />
 	
 	<script src="js/admin.js"></script>
@@ -28,7 +31,7 @@
 	</script>
 </head>
 
-<body id="home">
+<body >
 
 <div id="login-pane">
 	<div id="login-bg-top"></div>
@@ -43,7 +46,7 @@
 						<label id="login-user-label">Name:</label>
 					</th>
 					<td colspan="2">
-						<input id="login-user" class="text-entry" type="text" style="width: 98%;" name="name" >
+						<input id="login-user" class="text-entry" type="text" name="name" >
 					</td>
 				</tr>
 				<tr>
@@ -51,12 +54,12 @@
 						<label id="login-password-label">Password:</label>
 					</th>
 					<td colspan="2">
-						<input id="login-password" class="text-entry" type="password" style="width: 98%;" name="password">
+						<input id="login-password" class="text-entry" type="password" name="password">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="3">
-						<input id="login-form-button" type="button" style="float: right; display: block;" value="Login">
+						<input id="login-form-button" type="button" value="Login">
 					</td>
 				</tr>
 			</tbody>
