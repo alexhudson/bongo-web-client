@@ -1,6 +1,6 @@
 body.login {
-    background-color: #1d3980;
-    overflow: hidden;
+            background-color: #1d3980;
+/*    overflow: hidden;*/
 }
 
     #login-pane { 
@@ -32,7 +32,6 @@ body.login {
             display: block;
             background: url(../images/login-logo.png) no-repeat 50% 0;
         }
-        .eng-msie.engv-6 #login-logo { background-image: url(../images/login-logo.gif); }
 
         #login-form-message {
             padding: 3em 0 0.75em;
@@ -44,11 +43,16 @@ body.login {
         }
 
         #login-pane table {
-          text-align: left;
-          margin: 0 auto;
+            text-align: left;
+            margin: 0 auto;
         }
 
-        #login-pane th,
+        #login-pane th {
+            padding: 4px;
+            text-align: right;
+            font-weight: normal;
+        }
+
         #login-pane td {
           text-align: right;
           font-weight: normal;
@@ -88,7 +92,30 @@ body.login {
             height: 293px;
             bottom: -296px;
             border-top: 1px solid #1d3980;
-			-webkit-transform: rotate(-180deg);
-			-moz-transform: rotate(-180deg);
+            -webkit-transform: rotate(-180deg);
+            -moz-transform: rotate(-180deg);
         }
-        .eng-msie.engv-6 #login-bg-bottom { bottom: -298px; }
+        #login-user {
+            -webkit-box-shadow: inset 1px 1px 1px 1px #999;
+            -moz-box-shadow: inset 1px 1px 1px 1px #999;
+            box-shadow: inset 1px 1px 1px 1px #999;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 4px;
+        }
+        #login-user-lable {
+            padding: 4px;
+        }
+        #login-password {
+            -webkit-box-shadow: inset 1px 1px 1px 1px #999;
+            -moz-box-shadow: inset 1px 1px 1px 1px #999;
+            box-shadow: inset 1px 1px 1px 1px #999;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 4px;
+        }
+        #login-form-button {
+            padding: 5px;
+        }
