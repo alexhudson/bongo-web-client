@@ -8,10 +8,12 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Cantarell:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="css/layout.css" />
-	<link rel="stylesheet" type="text/css" href="css/login.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="css/layout.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/login.css" /> -->
+	<link rel="stylesheet" type="text/css" href="css/admin.css" />
 
-	
+	<script src="js/lib/backbone.js"></script>
+	<script src="js/lib/underscore.js"></script>
 	<script src="js/lib/jquery-1.6.2.js"></script>
 	<script src="js/lib/jquery.tmpl.js"></script>
 	<script src="js/lib/jquery.cookie.js"></script>
@@ -34,10 +36,6 @@
 <body >
 
 <div id="login-pane">
-	<div id="login-bg-top"></div>
-	<div id="login-bg-bottom"></div>
-	<h1 id="login-logo">Bongo</h1>
-	<h4 id="login-form-message">&nbsp;</h4>
 	<form id="login-form" class="loginbox">
 		<table cellspacing="6" cellpadding="0" summary="">
 			<tbody>
@@ -59,7 +57,9 @@
 				</tr>
 				<tr>
 					<td colspan="3">
+						<span class="button">
 						<input id="login-form-button" type="button" value="Login">
+						</span>
 					</td>
 				</tr>
 			</tbody>
