@@ -1,18 +1,36 @@
-# Bongo Web Client
+# 	Bongo Web Client
 
 This is is the Git repository for the new Bongo web client project
 
+# 	Installing the UI
 
-## Note on Patches/Pull Requests
+## 	General Usage
 
- * Fork the project.
- * Make your feature addition or bug fix.
- * Add tests for it. This is important so I don't break it in a
-   future version unintentionally.
- * Commit, do not mess with rakefile, version, or history.
-   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
- * Send me a pull request. Bonus points for topic branches.
+	* Install apache on the server you run Bongo on.
+	*	Copy the apache.conf file from the config directory to your vhost.d directory.
+	* Edit the apache.conf file and make sure you change the server name to the URL that you 
+		will be using to access your bongo web UI
+	* Make the nessesary changes to the file to point to the folder you have installed your Web UI into.
+	
+		The Ui will try to connect to the Bongo instance on the local server
 
-## Copyright
+## 	Additional notes for Development
+
+ * 	To develop against some test data change the "SetEnv APPLICATION_ENV development"  
+		option in the apache.conf file to "SetEnv APPLICATION_ENV test"
+ *	This will give you some basic data in the web ui no saves will take place 
+		but you can enter and delete data
+
+## 	Note on Patches/Pull Requests
+
+ * 	Fork the project.
+ * 	Make your feature addition or bug fix.
+ * 	Add tests for it. This is important so I don't break it in a
+   	future version unintentionally.
+ * 	Commit, do not mess with rakefile, version, or history.
+   	(if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+ * 	Send me a pull request. Bonus points for topic branches.
+
+## 	Copyright
 
 Copyright (c) 2011 Bongo-Project . See LICENSE for details.
