@@ -1,0 +1,121 @@
+body.login {
+            background-color: #1d3980;
+/*    overflow: hidden;*/
+}
+
+    #login-pane { 
+        position: absolute;
+        top: 25%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: #333;
+        padding: 1em 0 1em;
+        border-top: 2px solid #d4dceb;
+        border-bottom: 2px solid #e4eaf4;
+        margin-bottom: 298px;
+        background: #b4c5e1 url(../images/login-bg-middle.png) repeat-x 0 0;
+    }
+    
+        #login-logo {
+            position: absolute;
+            top: -76px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            width: 100%;
+            font-size: 0;
+            text-indent: -2000px;
+            color: transparent;
+            overflow: hidden;
+            height: 118px;
+            display: block;
+            background: url(../images/login-logo.png) no-repeat 50% 0;
+        }
+
+        #login-form-message {
+            padding: 3em 0 0.75em;
+            font-size: 87%;
+        }
+
+        #login-pane input {
+            color: #000;
+        }
+
+        #login-pane table {
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        #login-pane th {
+            padding: 4px;
+            text-align: right;
+            font-weight: normal;
+        }
+
+        #login-pane td {
+          text-align: right;
+          font-weight: normal;
+        }
+
+        #login-pane td.default { 
+          text-align: left;
+        }
+
+        #login-pane .text-entry {
+          width: 15em;
+        }
+
+        #login-pane h2 {
+          color: #99b;
+          margin: 1em;
+        }
+
+        #login-pane a {
+        }
+
+        #login-bg-top,
+        #login-bg-bottom {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            right: 0;
+        }
+        #login-bg-top {
+            background: url(../images/grad-page.png) repeat-x 0 100%;
+            height: 185px;
+            top: -188px;
+            border-bottom: 1px solid #385798;
+        }
+        #login-bg-bottom {
+            background: url(../images/grad-page.png) repeat-x 0 0;
+            height: 293px;
+            bottom: -296px;
+            border-top: 1px solid #1d3980;
+            -webkit-transform: rotate(-180deg);
+            -moz-transform: rotate(-180deg);
+        }
+        #login-user {
+            -webkit-box-shadow: inset 1px 1px 1px 1px #999;
+            -moz-box-shadow: inset 1px 1px 1px 1px #999;
+            box-shadow: inset 1px 1px 1px 1px #999;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 3px;
+            padding: 4px;
+        }
+        #login-user-lable {
+            padding: 4px;
+        }
+        #login-password {
+            -webkit-box-shadow: inset 1px 1px 1px 1px #999;
+            -moz-box-shadow: inset 1px 1px 1px 1px #999;
+            box-shadow: inset 1px 1px 1px 1px #999;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 4px;
+        }
+        #login-form-button {
+            padding: 5px;
+        }
