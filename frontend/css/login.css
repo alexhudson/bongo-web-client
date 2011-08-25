@@ -99,9 +99,9 @@ body.login {
             -webkit-box-shadow: inset 1px 1px 1px 1px #999;
             -moz-box-shadow: inset 1px 1px 1px 1px #999;
             box-shadow: inset 1px 1px 1px 1px #999;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 3px;
             padding: 4px;
         }
         #login-user-lable {
