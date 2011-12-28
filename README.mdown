@@ -17,7 +17,7 @@ This is is the Git repository for the new Bongo web client project
 ## 	Additional notes for Development
 
  * 	To develop against some test data change the "SetEnv APPLICATION_ENV development"  
-		option in the apache.conf file to "SetEnv APPLICATION_ENV test"
+		option in the apache.conf file to "SetEnv APPLICATION_ENV testing"
  *	This will give you some basic data in the web ui no saves will take place 
 		but you can enter and delete data
 
