@@ -7,7 +7,6 @@
 	<title>Admin prototype</title>
 	<link href='http://fonts.googleapis.com/css?family=Cantarell:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="css/admin.css" />
 	<script src="js/lib/backbone.js"></script>
 	<script src="js/lib/underscore.js"></script>
 	<script src="js/lib/jquery-1.6.2.js"></script>
@@ -18,6 +17,8 @@
 	<script src="js/lib/knockout.mapping-latest.js"></script>
 	<script src="js/lib/modernizr.custom.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/themes/smoothness/jquery-ui-1.8.14.custom.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/admin-ui.css" />
 	<script src="js/admin.js"></script>
 	<script>
 	var admin;
@@ -36,7 +37,7 @@
 			<tbody>
 				<tr>
 					<th>
-						<label id="login-user-label">Name:</label>
+						<label>Name:</label>
 					</th>
 					<td colspan="2">
 						<input id="login-user" class="text-entry" type="text" name="name" >
@@ -44,7 +45,7 @@
 				</tr>
 				<tr>
 					<th>
-						<label id="login-password-label">Password:</label>
+						<label>Password:</label>
 					</th>
 					<td colspan="2">
 						<input id="login-password" class="text-entry" type="password" name="password">
@@ -52,9 +53,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<span class="button">
-						<input id="login-form-button" type="button" value="Login">
-						</span>
+						<input class="btn" id="login-form-button" type="button" value="Login">
 					</td>
 				</tr>
 			</tbody>
@@ -82,7 +81,7 @@
 			<li><a class="tabs-queue" href="#tabs-queue" alt="Internal queue"></a></a></li>
 		</ul>
 		<div id="tabs-accounts">
-			<table>
+			<table class="bordered-table zebra-striped">
 				<thead>
 					<tr>
 						<th>Login name</th>
@@ -95,9 +94,9 @@
 			<div data-bind="visible: ! _showSelectedDomain()">
 				<h2>Domains available</h2>
 				
-				<button data-bind="click: function() { _selectedDomain('default_config'); _showSelectedDomain(true); }">Edit fall-back configuration</button>
+				<button class="btn" type="button" data-bind="click: function() { _selectedDomain('default_config'); _showSelectedDomain(true); }">Edit fall-back configuration</button>
 				
-				<table>
+				<table class="bordered-table zebra-striped">
 					<thead>
 						<tr>
 							<th>Domain name</th>
@@ -107,15 +106,15 @@
 					<tbody data-bind="template: { name: 'tmp_domain_list', foreach: queue.domains, templateOptions: { selected: _selectedDomain, showSelected: _showSelectedDomain } }">
 					</tbody>
 				</table>
-				<button data-bind="click: function() { var t = _showAddDomain(); _showAddDomain(!t); }">+</button>
+				<button class="btn" type="button" data-bind="click: function() { var t = _showAddDomain(); _showAddDomain(!t); }">+</button>
 				
 				<div data-bind="visible: _showAddDomain()">
-					<p>New domain name: <input type="text" id="add-domain-name" /> <button data-bind="click: function() { admin.addDomain(); }">Add new domain</button></p>
+					<p>New domain name: <input type="text" id="add-domain-name" /> <button class="btn" type="button" data-bind="click: function() { admin.addDomain(); }">Add new domain</button></p>
 				</div>
 			</div>
 			
 			<div data-bind="visible: _showSelectedDomain()">
-				<button data-bind="click: function () { _showSelectedDomain(false); } ">Close</button>
+				<button class="btn" type="button"  data-bind="click: function () { _showSelectedDomain(false); } ">Close</button>
 				<h2>Domain: <span data-bind="text: _selectedDomain()">domain name</span></h2>
 				
 				<div data-bind="visible: domains[_selectedDomain()]['domainalias']() == ''">
@@ -124,7 +123,7 @@
 						<option value="1">Full e-mail address is user account name</option>
 					</select></p>
 					
-					<table>
+					<table class="bordered-table zebra-striped">
 						<thead >
 							<th>Incoming local part</th>
 							<th>Maps to</th>
@@ -132,12 +131,12 @@
 						<tbody data-bind="template: { name: 'tmp_domain_mapping', foreach: domains[_selectedDomain()]['aliases'], templateOptions: { domains: domains, domain: _selectedDomain() } }">
 						</tbody>
 					</table>
-					<button data-bind="click: function () { admin.addMapping(); }">Add new mapping</button>
+					<button class="btn" type="button" data-bind="click: function () { admin.addMapping(); }">Add new mapping</button>
 				</div>
 				
 				<h3>Domain Accounts</h3>
 				
-				<table>
+				<table class="bordered-table zebra-striped">
 					<thead>
 						<tr>
 							<th>Login name</th>
@@ -148,7 +147,7 @@
 				
 				<h3>Domains mapped onto this configuration</h3>
 				
-				<table>
+				<table class="bordered-table zebra-striped">
 					<thead>
 						<tr>
 							<th>Domain name</th>
@@ -158,14 +157,14 @@
 				</table>
 				
 				<br />
-				<button data-bind="click: function () { admin.removeCurrentDomain(); }">Remove domain</button>
+				<button class="btn" type="button" data-bind="click: function () { admin.removeCurrentDomain(); }">Remove domain</button>
 			</div>
 		</div>
 		<div id="tabs-agents">
 			
 			<h2>Agents enabled on the system</h2>
 			
-			<table>
+			<table class="bordered-table zebra-striped">
 				<thead>
 					<tr>
 						<th>Agent Name</th>
@@ -179,7 +178,7 @@
 			
 			<br />
 			
-			<table>
+			<table class="bordered-table zebra-striped">
 				<tr>
 					<td>System hostname:</td>
 					<td><input type="text" data-bind="value: global.hostname" /></td>
@@ -195,7 +194,7 @@
 		<div id="tabs-anti">
 			<h2>Antispam</h2>
 			
-			<table>
+			<table class="bordered-table zebra-striped">
 				<tr>
 					<td>Timeout:</td>
 					<td><input type="text" data-bind="value: antispam.timeout" /></td>
@@ -209,7 +208,7 @@
 			
 			<h2>Antivirus</h2>
 			
-			<table>
+			<table class="bordered-table zebra-striped">
 				<tr>
 					<td>Timeout:</td>
 					<td><input type="text" data-bind="value: antispam.timeout" /></td>
@@ -224,7 +223,7 @@
 		<div id="tabs-access">
 			<h2>POP 3</h2>
 			
-			<table>
+			<table class="bordered-table zebra-striped">
 				<tr>
 					<td>Port:</td>
 					<td><input type="text" data-bind="value: pop3.port" /></td>
@@ -236,7 +235,7 @@
 			
 			<h2>IMAP</h2>
 			
-			<table>
+			<table class="bordered-table zebra-striped">
 				<tr>
 					<td>Port:</td>
 					<td><input type="text" data-bind="value: imap.port" /></td>
@@ -251,7 +250,7 @@
 		</div>
 		
 		<div id="tabs-smtp">
-			<table>
+			<table class="bordered-table zebra-striped">
 				<tr>
 					<td>Port:</td>
 					<td><input type="text" data-bind="value: smtp.port" /></td>
@@ -269,7 +268,7 @@
 		</div>
 		
 		<div id="tabs-queue">
-			<table>
+			<table class="bordered-table zebra-striped">
 				<tr>
 					<td>Port:</td>
 					<td><input type="text" data-bind="value: queue.port" /></td>
@@ -305,7 +304,7 @@
 <script type="text/html" id="tmp_domain_list">
 	<tr>
 		<td data-bind="text: $data">domain</td>
-		<td><button data-bind="click: function() { $item.selected($data); $item.showSelected(true); }">Edit</button></td>
+		<td><button class="btn" type="button" data-bind="click: function() { $item.selected($data); $item.showSelected(true); }">Edit</button></td>
 	</li>
 </script>
 
@@ -313,7 +312,7 @@
 	<tr>
 		<td><input type="text" data-bind="value: from" /></td>
 		<td><input type="text" data-bind="value: to" /></td>
-		<td><button data-bind="click: function () { $item.domains[$item.domain]['aliases'].remove($data); }">Remove</button></td>
+		<td><button class="btn" type="button" data-bind="click: function () { $item.domains[$item.domain]['aliases'].remove($data); }">Remove</button></td>
 	</tr>
 </script>
 
