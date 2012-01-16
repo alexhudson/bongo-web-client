@@ -109,6 +109,10 @@ body {
 	width: auto;
 }
 
+#admin-header-buttons {
+	margin: 5px;
+}
+
 .tabs-accounts {
 	background: url('/images/system-users.png') no-repeat;
 	width: 30px;
@@ -119,6 +123,10 @@ body {
 	background: url('/images/agent-global.png') no-repeat;
 	width: 30px;
 	height:30px;
+}
+
+.btn-tabs{
+	margin-bottom: 5px;
 }
 
 .tabs-agents {
@@ -154,4 +162,11 @@ body {
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
     font-family: 'Cantarell',sans-serif;
     font-size: 16px;
+}
+
+.ui-widget-header {
+    background: url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll 50% 50% #FFF;
+    border: 1px solid #AAAAAA;
+    color: #222222;
+    font-weight: bold;
 }
