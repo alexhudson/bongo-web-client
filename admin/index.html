@@ -66,8 +66,8 @@
 	</div>
 	
 	<div id="admin-header-buttons">
-		<button id="admin-logout" style="float: right;">Log Out</button>
-		<button id="admin-save">Save changes</button>
+		<button class="btn" id="admin-logout" style="float: right;">Log Out</button>
+		<button class="btn" id="admin-save">Save changes</button>
 	</div>
 
 	<div id="admin-tabs">
@@ -94,7 +94,7 @@
 			<div data-bind="visible: ! _showSelectedDomain()">
 				<h2>Domains available</h2>
 				
-				<button class="btn" type="button" data-bind="click: function() { _selectedDomain('default_config'); _showSelectedDomain(true); }">Edit fall-back configuration</button>
+				<button class="btn btn-tabs" type="button" data-bind="click: function() { _selectedDomain('default_config'); _showSelectedDomain(true); }">Edit fall-back configuration</button>
 				
 				<table class="bordered-table zebra-striped">
 					<thead>
