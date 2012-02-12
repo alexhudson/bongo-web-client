@@ -253,16 +253,16 @@
             <table class="bordered-table zebra-striped">
                 <tr>
                     <td>Port:</td>
-                    <td><input type="text" data-bind="value: smtp.port" /></td>
+                    <td><input id="input-auto" type="text" data-bind="value: smtp.port" /></td>
                 </tr><tr>
                     <td>Port (SSL):</td>
-                    <td><input type="text" data-bind="value: smtp.port_ssl" /></td>
+                    <td><input id="input-auto" type="text" data-bind="value: smtp.port_ssl" /></td>
                 </tr><tr>
                     <td>Use relay host:</td>
                     <td><input type="checkbox" data-bind="checked: smtp.use_relay_host" /></td>
                 </tr><tr data-bind="visible: smtp.use_relay_host">
                     <td>Relay host:</td>
-                    <td><input type="text" data-bind="value: smtp.relay_host" /></td>
+                    <td><input id="input-auto" type="text" data-bind="value: smtp.relay_host" /></td>
                 </tr>
             </table>
         </div>
