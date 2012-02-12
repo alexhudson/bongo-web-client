@@ -1,11 +1,11 @@
 .logo {
-	background:url('/images/Bongo-logo.png') no-repeat;
-	width:400px;
-	height:50px;
-	background-color: #fff;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px; 
+    background:url('/images/Bongo-logo.png') no-repeat;
+    width:400px;
+    height:50px;
+    background-color: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px; 
 }
 
 body {
@@ -37,7 +37,7 @@ body {
 }
 
 #login-form table .btn {
-	float: right;
+    float: right;
 }
 
 #login-form table {
@@ -79,7 +79,7 @@ body {
     -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
     box-shadow: inset 0 1px 3px #000000);
     -webkit-box-shadow: inset 0 1px 3px #000000;
-	-moz-box-shadow: inset 0 1px 3px #000000;
+    -moz-box-shadow: inset 0 1px 3px #000000;
 }
 
 #login-password {
@@ -95,73 +95,75 @@ body {
     -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
     box-shadow: inset 0 1px 3px #000000);
     -webkit-box-shadow: inset 0 1px 3px #000000;
-	-moz-box-shadow: inset 0 1px 3px #000000;
+    -moz-box-shadow: inset 0 1px 3px #000000;
 }
 
 #admin-tabs table th {
-	background: none repeat scroll 0 0 #B9C9FE;
+    background: none repeat scroll 0 0 #B9C9FE;
     font-weight: bold;
     padding-top: 9px;
     vertical-align: middle;
 }
 
 #admin-tabs table {
-	width: auto;
+    width: auto;
 }
 
 #admin-header-buttons {
-	margin: 5px;
+    margin: 5px;
 }
 
 .tabs-accounts {
-	background: url('/images/system-users.png') no-repeat;
-	width: 30px;
-	height:30px;
+    background: url('/images/system-users.png') no-repeat;
+    width: 30px;
+    height:30px;
 }
 
 .tabs-domains {
-	background: url('/images/agent-global.png') no-repeat;
-	width: 30px;
-	height:30px;
+    background: url('/images/agent-global.png') no-repeat;
+    width: 30px;
+    height:30px;
 }
 
 .btn-tabs{
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .tabs-agents {
-	background: url('/images/agent-control.png') no-repeat;
-	width: 30px;
-	height:30px;
+    background: url('/images/agent-control.png') no-repeat;
+    width: 30px;
+    height:30px;
 }
 
 .tabs-anti {
-	background: url('/images/agent-bongoavirus.png') no-repeat;
-	width: 30px;
-	height:30px;
+    background: url('/images/agent-bongoavirus.png') no-repeat;
+    width: 30px;
+    height:30px;
 }
 
 .tabs-access {
-	background: url('/images/agent-bongoimap.png') no-repeat;
-	width: 30px;
-	height:30px;
+    background: url('/images/agent-bongoimap.png') no-repeat;
+    width: 30px;
+    height:30px;
 }
 
 .tabs-smtp {
-	background: url('/images/agent-bongosmtp.png') no-repeat;
-	width: 30px;
-	height:30px;
+    background: url('/images/agent-bongosmtp.png') no-repeat;
+    width: 30px;
+    height:30px;
 }
 
 .tabs-queue {
-	background: url('/images/agent-bongomailprox.png') no-repeat;
-	width: 30px;
-	height:30px;
+    background: url('/images/agent-bongomailprox.png') no-repeat;
+    width: 30px;
+    height:30px;
 }
 
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
     font-family: 'Cantarell',sans-serif;
     font-size: 16px;
+    width: auto;
+    margin-bottom: 3px;
 }
 
 .ui-widget-header {
@@ -169,4 +171,8 @@ body {
     border: 1px solid #AAAAAA;
     color: #222222;
     font-weight: bold;
+}
+
+.input-auto {
+  width: auto;
 }
